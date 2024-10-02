@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Error_Planned_Sale</name>
+        <label>Error Planned Sale</label>
+        <locationX>264</locationX>
+        <locationY>647</locationY>
+        <customErrorMessages>
+            <errorMessage>This Planned Sale alreaty exist</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>if_duplicate</name>
+        <label>if duplicate</label>
+        <locationX>396</locationX>
+        <locationY>539</locationY>
+        <defaultConnector>
+            <targetReference>loop_planned_sales_records</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>duplicate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>loop_planned_sales_records.Year__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Year__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>loop_planned_sales_records.Id</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>loop_planned_sales_records.Month__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Month__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>loop_planned_sales_records.Car_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Car_Type__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Error_Planned_Sale</targetReference>
+            </connector>
+            <label>duplicate</label>
+        </rules>
+    </decisions>
+    <description>Implement a rule to ensure that only one Planned Sales record can
+be created for a combination of Year, Month, and Car Type (New or
+Used).
+Any attempt to create a duplicate record for the same combination
+should trigger an error message.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>valuecheck</name>
+        <dataType>Boolean</dataType>
+        <expression>AND({!loop_planned_sales_records.Year__c}={!$Record.Year__c},{!loop_planned_sales_records.Month__c}={!$Record.Month__c})</expression>
+    </formulas>
+    <interviewLabel>Unique Planned Sales Record Constraint {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Unique Planned Sales Record Constraint V2</label>
+    <loops>
+        <name>loop_planned_sales_records</name>
+        <label>loop planned sales records</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <collectionReference>Get_All_Planned_Sales_Records</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>if_duplicate</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_All_Planned_Sales_Records</name>
+        <label>Get All Planned Sales Records</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>loop_planned_sales_records</targetReference>
+        </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Planned_Sales__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_All_Planned_Sales_Records</targetReference>
+        </connector>
+        <object>Planned_Sales__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
