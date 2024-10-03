@@ -7,18 +7,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>New</fullName>
-                <default>false</default>
-                <label>New</label>
-            </value>
-            <value>
-                <fullName>Used</fullName>
-                <default>false</default>
-                <label>Used</label>
-            </value>
-        </valueSetDefinition>
+        <valueSetName>Car_Type</valueSetName>
     </valueSet>
 </CustomField>

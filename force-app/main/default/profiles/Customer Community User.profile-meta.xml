@@ -798,7 +798,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Car_Feature__c.Feature__c</field>
+        <field>Car_Feature__c.Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

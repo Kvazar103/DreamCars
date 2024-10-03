@@ -34,33 +34,6 @@ such as car type, features, and budget.</description>
         <won>false</won>
     </standardValue>
     <standardValue>
-        <fullName>Value Proposition</fullName>
-        <default>false</default>
-        <label>Value Proposition</label>
-        <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>50</probability>
-        <won>false</won>
-    </standardValue>
-    <standardValue>
-        <fullName>Id. Decision Makers</fullName>
-        <default>false</default>
-        <label>Id. Decision Makers</label>
-        <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>60</probability>
-        <won>false</won>
-    </standardValue>
-    <standardValue>
-        <fullName>Perception Analysis</fullName>
-        <default>false</default>
-        <label>Perception Analysis</label>
-        <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>70</probability>
-        <won>false</won>
-    </standardValue>
-    <standardValue>
         <fullName>Proposal/Price Quote</fullName>
         <default>false</default>
         <description>Presenting potential car options, pricing, and financing details to the
@@ -83,6 +56,16 @@ price and features.</description>
         <won>false</won>
     </standardValue>
     <standardValue>
+        <fullName>Contract Sent</fullName>
+        <default>false</default>
+        <description>Sending the formal sales contract for the customer’s review and signature.</description>
+        <label>Contract Sent</label>
+        <closed>false</closed>
+        <forecastCategory>Pipeline</forecastCategory>
+        <probability>90</probability>
+        <won>false</won>
+    </standardValue>
+    <standardValue>
         <fullName>Closed Won</fullName>
         <default>false</default>
         <description>The deal is confirmed, and the customer agrees to purchase the car. The
@@ -102,16 +85,6 @@ to proceed or choosing a different option.</description>
         <closed>true</closed>
         <forecastCategory>Omitted</forecastCategory>
         <probability>0</probability>
-        <won>false</won>
-    </standardValue>
-    <standardValue>
-        <fullName>Contract Sent</fullName>
-        <default>false</default>
-        <description>Sending the formal sales contract for the customer’s review and signature.</description>
-        <label>Contract Sent</label>
-        <closed>false</closed>
-        <forecastCategory>Pipeline</forecastCategory>
-        <probability>90</probability>
         <won>false</won>
     </standardValue>
 </StandardValueSet>
