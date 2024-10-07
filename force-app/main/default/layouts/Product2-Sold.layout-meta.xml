@@ -47,6 +47,10 @@
                 <behavior>Edit</behavior>
                 <field>Safety_Rating__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Car_Status__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
