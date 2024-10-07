@@ -85,6 +85,7 @@
         <members>Account.UpsellOpportunity__c</members>
         <members>Car_Feature__c.Car__c</members>
         <members>Car_Feature__c.Feature__c</members>
+        <members>Car_Feature__c.Type__c</members>
         <members>Car_Service__c.Amount_Charged__c</members>
         <members>Car_Service__c.Car__c</members>
         <members>Car_Service__c.Date__c</members>
@@ -528,6 +529,7 @@
         <name>FlowDefinition</name>
     </types>
     <types>
+        <members>Car_Type</members>
         <members>Condition</members>
         <name>GlobalValueSet</name>
     </types>
@@ -1260,7 +1262,6 @@
         <members>CalendarModel</members>
         <members>CalendarView</members>
         <members>Campaign</members>
-        <members>Car_Feature__c</members>
         <members>Car_Service__c</members>
         <members>Case</members>
         <members>ChangeRequest</members>
