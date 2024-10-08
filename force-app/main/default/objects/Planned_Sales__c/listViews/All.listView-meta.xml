@@ -5,6 +5,8 @@
     <columns>Car_Type__c</columns>
     <columns>Year__c</columns>
     <columns>Month__c</columns>
+    <columns>Total_Amount_Earned__c</columns>
+    <columns>Count_of_Cars_Sold__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>
