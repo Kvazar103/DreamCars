@@ -9,6 +9,14 @@
 @isTest
 public with sharing class OpportunityTriggerHelperTest {
     
+    private static Trigger_Control__c createTriggerControl(){ //custom setting trigger control 
+        Trigger_Control__c customSetting = new Trigger_Control__c(
+            Name = 'MakeActive', 
+            isActive__c = true   
+        );
+        return customSetting;
+    }
+    
     private static Planned_Sales__c createPlannedSale(){
         Planned_Sales__c ps=new Planned_Sales__c(Car_Type__c='Used',Year__c=Date.today().year(),Month__c=Date.today().month());
         return ps;
@@ -62,13 +70,14 @@ public with sharing class OpportunityTriggerHelperTest {
     @isTest
     private static void testPositiveOpportunityClose(){
         
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
+        
         Account account=createAccount();
         insert account;
         
         Planned_Sales__c plannedSale=createPlannedSale();
         insert plannedSale;
-        
-        
         
         Product2 car=createCar();
         insert car;
@@ -96,20 +105,23 @@ public with sharing class OpportunityTriggerHelperTest {
         OpportunityLineItem oli=[SELECT Id,Product2.Condition__c FROM OpportunityLineItem];
 
         
-        system.assert(newOpportunity!=null);
-        system.assert(newPlannedSale!=null);
-        system.assertEquals(newOpportunity.StageName,'Closed Won');
-        system.assertEquals(newPlannedSale.Year__c,newOpportunity.CloseDate.year());
-        system.assertEquals(newPlannedSale.Month__c,newOpportunity.CloseDate.month());
-        system.assertEquals(newPlannedSale.Total_Amount_Earned__c,newOpportunity.Amount);
-        system.assertEquals(newPlannedSale.Count_of_Cars_Sold__c,newOpportunity.OpportunityLineItems.size());
-        system.assertEquals(newPlannedSale.Car_Type__c,oli.Product2.Condition__c);
+        Assert.isTrue(newOpportunity!=null);
+        Assert.isTrue(newPlannedSale!=null);
+        Assert.areEqual(newOpportunity.StageName,'Closed Won');
+        Assert.areEqual(newPlannedSale.Year__c,newOpportunity.CloseDate.year());
+        Assert.areEqual(newPlannedSale.Month__c,newOpportunity.CloseDate.month());
+        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,newOpportunity.Amount);
+        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,newOpportunity.OpportunityLineItems.size());
+        Assert.areEqual(newPlannedSale.Car_Type__c,oli.Product2.Condition__c);
 
     }
     
     //test negative
     @isTest
     private static void testNegativeOpportunityClose(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
         
         Account account=createAccount();
         insert account;
@@ -142,17 +154,20 @@ public with sharing class OpportunityTriggerHelperTest {
         OpportunityLineItem oli=[SELECT Id,Product2.Condition__c FROM OpportunityLineItem];
         Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
          
-        system.assert(newOpportunity!=null);
-        system.assert(newPlannedSale!=null);
-        system.assertEquals(newOpportunity.StageName,'Contract Sent');
-        system.assert(newPlannedSale.Total_Amount_Earned__c!=newOpportunity.Amount);
-        system.assert(newPlannedSale.Count_of_Cars_Sold__c!=newOpportunity.OpportunityLineItems.size());
+        Assert.isTrue(newOpportunity!=null);
+        Assert.isTrue(newPlannedSale!=null);
+        Assert.areEqual(newOpportunity.StageName,'Contract Sent');
+        Assert.isTrue(newPlannedSale.Total_Amount_Earned__c!=newOpportunity.Amount);
+        Assert.isTrue(newPlannedSale.Count_of_Cars_Sold__c!=newOpportunity.OpportunityLineItems.size());
 
     }
     
     //test bulkify
     @isTest
     private static void testBulkifyOpportunityClosed(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
         
         List<Account> accounts=new List<Account>();
 
@@ -170,14 +185,11 @@ public with sharing class OpportunityTriggerHelperTest {
         
         for(Integer i=0;i<200;i++){
             accounts.add(createAccount());
-            //plannedSales.add(createPlannedSale());
             Product2 car=createCar();
             car.VIN_Number__c+=i;
             cars.add(car);
         }
         insert accounts;
-        //insert plannedSales;
-        
         insert cars;
         
         for(Integer i=0;i<200;i++){
@@ -219,15 +231,18 @@ public with sharing class OpportunityTriggerHelperTest {
         AggregateResult[] totalAmount=[SELECT SUM(Amount)totalAmount FROM Opportunity];
         Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
         
-        system.assert(opp.size()==200);
-        system.assertEquals(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
-        system.assertEquals(newPlannedSale.Count_of_Cars_Sold__c,200);
+        Assert.isTrue(opp.size()==200);
+        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
+        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,200);
 
     }
     
     //positive delete opportunity
     @isTest
     private static void testPositiveDeleteOpportunity(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
         
         Account account=createAccount();
         insert account;
@@ -260,16 +275,20 @@ public with sharing class OpportunityTriggerHelperTest {
         
         Planned_Sales__c ps=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
         
-        system.assertEquals(opportunity.CloseDate.month(),plannedSale.Month__c);
-        system.assertEquals(opportunity.CloseDate.year(),plannedSale.Year__c);
-        system.assert(ps.Total_Amount_Earned__c==0);
-        system.assert(ps.Count_of_Cars_Sold__c==0);
+        Assert.areEqual(opportunity.CloseDate.month(),plannedSale.Month__c);
+        Assert.areEqual(opportunity.CloseDate.year(),plannedSale.Year__c);
+        Assert.isTrue(ps.Total_Amount_Earned__c==0);
+        Assert.isTrue(ps.Count_of_Cars_Sold__c==0);
         
     }
     
     //negative test delete
     @isTest
     private static void testNegativeDeleteOpportunity(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
+        
         Account account=createAccount();
         insert account;
         
@@ -285,6 +304,7 @@ public with sharing class OpportunityTriggerHelperTest {
         insert priceBookEntry;
         
         Opportunity opportunity=createOpportunity(priceBook,account.Id);
+        
         insert opportunity;
         
         OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
@@ -296,15 +316,19 @@ public with sharing class OpportunityTriggerHelperTest {
         
         Test.StopTest();
         
-        system.assertEquals(opportunity.CloseDate.month(),plannedSale.Month__c);
-        system.assertEquals(opportunity.CloseDate.year(),plannedSale.Year__c);
-        system.assertEquals(plannedSale.Total_Amount_Earned__c,opportunity.Amount);
-        system.assertEquals(plannedSale.Count_of_Cars_Sold__c,opportunity.OpportunityLineItems.size());
+        Assert.areEqual(opportunity.CloseDate.month(),plannedSale.Month__c);
+        Assert.areEqual(opportunity.CloseDate.year(),plannedSale.Year__c);
+        Assert.areNotEqual(plannedSale.Total_Amount_Earned__c,opportunity.Amount);
+        Assert.areNotEqual(plannedSale.Count_of_Cars_Sold__c,opportunity.OpportunityLineItems.size());
     }
     
     //bulkify test delete
     @isTest
     private static void testBulkifyDeleteOpportunity(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
+        
         List<Account> accounts=new List<Account>();
 
         List<Product2> cars=new List<Product2>();
@@ -358,9 +382,59 @@ public with sharing class OpportunityTriggerHelperTest {
         Planned_Sales__c planed=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
         system.debug(planed.Total_Amount_Earned__c);
 
-        system.assertEquals(planed.Total_Amount_Earned__c,0);
-        system.assertEquals(planed.Count_of_Cars_Sold__c,0);
+        Assert.AreEqual(planed.Total_Amount_Earned__c,0);
+        Assert.AreEqual(planed.Count_of_Cars_Sold__c,0);
         
+    }
+    
+    //test positive
+    @isTest
+    private static void testPositiveUpdateCarStatusWhenOpportunityStageChanged(){
+        
+        Trigger_Control__c triggerControl=createTriggerControl();
+        insert triggerControl;
+        
+        Account account=createAccount();
+        insert account;
+        
+        Planned_Sales__c plannedSale=createPlannedSale();
+        insert plannedSale;
+        
+        Product2 car=createCar();
+        insert car;
+        
+        Pricebook2 priceBook=getStandardPriceBook();
+        
+        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
+        insert priceBookEntry;
+        
+        Opportunity opportunity=createOpportunity(priceBook,account.Id);
+        insert opportunity;
+        
+        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
+        insert opportunityProduct;
+        
+        Test.StartTest();
+        
+        opportunity.StageName='Closed Lost';
+        update opportunity;
+        
+        opportunity.StageName='Prospecting';
+        update opportunity;
+        
+        opportunity.StageName='Contract Sent';
+        update opportunity;
+        
+        opportunity.StageName='Prospecting';
+        update opportunity;
+        
+        opportunity.StageName='Closed Won';
+        update opportunity;
+        
+        opportunity.StageName='Prospecting';
+        update opportunity;
+        
+        Test.StopTest();
     }
     
 

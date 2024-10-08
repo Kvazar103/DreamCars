@@ -1,10 +1,11 @@
 /**
  * @description       : 
- * @author            : Svyatoslav Andrushchak
+ * @author            : Nazar Voinarovych
  * @group             : 
  * @last modified on  : 10-07-2024
- * @last modified by  : Svyatoslav Andrushchak
+ * @last modified by  : Nazar Voinarovych
 **/
+
 public with sharing class PlannedSalesTriggerHelper {
     
     public static void createPlannedSales(){
@@ -12,10 +13,12 @@ public with sharing class PlannedSalesTriggerHelper {
         List<Planned_Sales__c> createdPlannedSales=[SELECT Id,Year__c,Month__c,Car_Type__c,Total_Amount_Earned__c,Count_of_Cars_Sold__c 
                                                FROM Planned_Sales__c WHERE Id IN:Trigger.New];
         
-        Map<Integer,Integer> monthAndYearOfPlannedSale=new Map<Integer,Integer>();
+        //Map<Integer,Integer> monthAndYearOfPlannedSale=new Map<Integer,Integer>();
 
-        Set<Integer> month;
-        Set<Integer> year;
+        Set<Integer> month=new Set<Integer>();
+        Set<Integer> year=new Set<Integer>();
+        
+        
         
         Map<String,Planned_Sales__c> relatedPlannedSales=new Map<String,Planned_Sales__c>();
         
@@ -27,13 +30,15 @@ public with sharing class PlannedSalesTriggerHelper {
                 String key=plannedSale.Month__c+'_'+plannedSale.Year__c+'_'+plannedSale.Car_Type__c;
                 relatedPlannedSales.put(key,plannedSale);
                 //! Problem HERE
-                monthAndYearOfPlannedSale.put((Integer) plannedSale.Month__c,(Integer) plannedSale.Year__c);
+                month.add((Integer) plannedSale.Month__c);
+                year.add((Integer) plannedSale.Year__c);
+                //monthAndYearOfPlannedSale.put((Integer) plannedSale.Month__c,(Integer) plannedSale.Year__c);
             }
 
-            if(!monthAndYearOfPlannedSale.isEmpty()){
+            if(month!=null && year!=null){
                 for(Opportunity opportunity:[SELECT Id,CloseDate,StageName,Amount,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity 
                                               WHERE CALENDAR_MONTH(CloseDate) IN :month 
-                                             AND CALENDAR_YEAR(CloseDate) IN:monthAndYearOfPlannedSale.values()
+                                             AND CALENDAR_YEAR(CloseDate) IN:year
                                              AND StageName='Closed Won'
                                             ]){ 
                      
@@ -66,7 +71,9 @@ public with sharing class PlannedSalesTriggerHelper {
     }
     public static void updatePlannedSales(List<Planned_Sales__c> newPlannedSales,Map<Id,Planned_Sales__c> oldPlannedSalesMap){
         
-        Map<Integer,Integer> monthAndYear=new Map<Integer,Integer>();
+        //Map<Integer,Integer> monthAndYear=new Map<Integer,Integer>();
+        Set<Integer> month=new Set<Integer>();
+        Set<Integer> year=new Set<Integer>();
         Map<String,Planned_Sales__c> plannedSales=new Map<String,Planned_Sales__c>();
         
         
@@ -81,25 +88,25 @@ public with sharing class PlannedSalesTriggerHelper {
                    || newPlannedSale.Car_Type__c!=oldPlannedSale.Car_Type__c){
                        
                        String key=newPlannedSale.Month__c+'_'+newPlannedSale.Year__c+'_'+newPlannedSale.Car_Type__c;
-                       monthAndYear.put((Integer) newPlannedSale.Month__c,(Integer) newPlannedSale.Year__c);
+                       //monthAndYear.put((Integer) newPlannedSale.Month__c,(Integer) newPlannedSale.Year__c);
                        newPlannedSale.Count_of_Cars_Sold__c=0.00;
                        newPlannedSale.Total_Amount_Earned__c=0.00;
+                       month.add((Integer) newPlannedSale.Month__c);
+                       year.add((Integer) newPlannedSale.Year__c);
                        plannedSales.put(key,newPlannedSale);
                    }
             }
-            if(!monthAndYear.isEmpty()){
-                
-            
+            if(month!=null && year!=null){
             for(Opportunity opportunity:[SELECT Id,CloseDate,StageName,Amount,
                                          (SELECT Id,Product2.Condition__c FROM OpportunityLineItems) 
                                          FROM Opportunity 
-                                         WHERE CALENDAR_MONTH(CloseDate) IN:monthAndYear.keySet()
+                                         WHERE CALENDAR_MONTH(CloseDate) IN:month
                                          AND StageName='Closed Won'
-                                         AND CALENDAR_YEAR(CloseDate) IN:monthAndYear.values()]){
+                                         AND CALENDAR_YEAR(CloseDate) IN:year]){
                  
                  String key=opportunity.CloseDate.month()+'_'+opportunity.CloseDate.year();                           
                  for(OpportunityLineItem oli:opportunity.OpportunityLineItems){
-                     String key2=key+'_'+oli.Product2.Condition__c;
+                    String key2=key+'_'+oli.Product2.Condition__c;
                      
                      
                      if(plannedSales.containsKey(key2)){

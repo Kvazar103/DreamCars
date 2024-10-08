@@ -121,6 +121,22 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>CarTriggerHelper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>CarTriggerHelperTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OpportunityLineItemTriggerHelper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OpportunityLineItemTriggerHelperTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>OpportunityTriggerHelper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -2513,6 +2529,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.showWarningMessage__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>OpportunityLineItem.Description</field>
         <readable>true</readable>
@@ -2980,6 +3001,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Product2.Year_of_Manufacture__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Product2.reservedInOpportunity__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

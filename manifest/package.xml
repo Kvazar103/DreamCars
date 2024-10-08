@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>CarTriggerHelper</members>
+        <members>CarTriggerHelperTest</members>
+        <members>OpportunityLineItemTriggerHelper</members>
+        <members>OpportunityLineItemTriggerHelperTest</members>
         <members>OpportunityTriggerHelper</members>
         <members>OpportunityTriggerHelperTest</members>
         <members>PlannedSalesTriggerHelper</members>
@@ -12,6 +16,8 @@
         <name>ApexEmailNotifications</name>
     </types>
     <types>
+        <members>CarTrigger</members>
+        <members>OpportunityLineItemTrigger</members>
         <members>OpportunityTrigger</members>
         <members>PlannedSalesTrigger</members>
         <name>ApexTrigger</name>
@@ -128,6 +134,7 @@
         <members>Opportunity.MainCompetitors__c</members>
         <members>Opportunity.OrderNumber__c</members>
         <members>Opportunity.TrackingNumber__c</members>
+        <members>Opportunity.showWarningMessage__c</members>
         <members>Order.Amount_Left__c</members>
         <members>Order.Amount_Paid__c</members>
         <members>Order.Opportunity__c</members>
@@ -172,6 +179,8 @@
         <members>Product2.Warranty__c</members>
         <members>Product2.Weight_Kg__c</members>
         <members>Product2.Year_of_Manufacture__c</members>
+        <members>Product2.reservedInOpportunity__c</members>
+        <members>Trigger_Control__c.isActive__c</members>
         <members>Warranty__c.Car__c</members>
         <members>Warranty__c.End_Date__c</members>
         <members>Warranty__c.Start_Date__c</members>
@@ -421,6 +430,7 @@
         <members>TimeSlot</members>
         <members>Topic</members>
         <members>TopicAssignment</members>
+        <members>Trigger_Control__c</members>
         <members>User</members>
         <members>UserExternalCredential</members>
         <members>UserPrioritizedRecord</members>
@@ -456,6 +466,7 @@
         <members>Feature__c-en_US</members>
         <members>Order_Payment__c-en_US</members>
         <members>Planned_Sales__c-en_US</members>
+        <members>Trigger_Control__c-en_US</members>
         <members>Warranty__c-en_US</members>
         <name>CustomObjectTranslation</name>
     </types>
@@ -530,6 +541,7 @@
         <members>LightningSalesConsole_UtilityBar</members>
         <members>LightningSales_UtilityBar</members>
         <members>LightningService_UtilityBar</members>
+        <members>Opportunity_Record_Page</members>
         <members>RevenueCloudConsole_UtilityBar</members>
         <name>FlexiPage</name>
     </types>
@@ -1498,10 +1510,13 @@
     </types>
     <types>
         <members>Account_Record_Page</members>
+        <members>Opportunity_Record_Page</members>
         <name>UiViewDefinition</name>
     </types>
     <types>
         <members>Opportunity.ClosedWonIfAccountBillingAddressPopulate</members>
+        <members>Opportunity.blockStageNameChangeIfShowWarningMessage</members>
+        <members>OpportunityLineItem.CannotAddASoldCar</members>
         <members>OpportunityLineItem.QuantityOnlyOne</members>
         <members>Product2.Restrict_Edit_SoldCar_RecordType_ForProf</members>
         <name>ValidationRule</name>
