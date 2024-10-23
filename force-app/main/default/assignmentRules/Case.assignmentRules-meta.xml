@@ -2,7 +2,7 @@
 <AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <assignmentRule>
         <fullName>Standard</fullName>
-        <active>true</active>
+        <active>false</active>
         <ruleEntry>
             <assignedTo>nazar.voinarovych250@gmail.com.mentorshipdev</assignedTo>
             <assignedToType>User</assignedToType>
@@ -86,6 +86,19 @@
                 <field>Account.Type</field>
                 <operation>contains</operation>
                 <value>Partner</value>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>Web Car Service Assignmet Rule</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>Service_Cases</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Web Car Service</value>
             </criteriaItems>
         </ruleEntry>
     </assignmentRule>

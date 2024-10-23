@@ -1,0 +1,11 @@
+Dear {!Case.SuppliedName},
+Thank you for scheduling a service appointment with Dream Cars. We have
+received your request and will be in touch shortly to confirm the details.
+Details Submitted:
+● Car Brand: {!Case.CarBrand__c}
+● Car Model: {!Case.CarModel__c}
+● Reason for Service: {!Case.Reason}
+
+If you have any further questions, feel free to reach out to us.
+Best regards,
+Dream Cars Service Team
