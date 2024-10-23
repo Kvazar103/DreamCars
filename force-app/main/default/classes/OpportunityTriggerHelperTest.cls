@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Nazar Voinarovych
  * @group             : 
- * @last modified on  : 10-07-2024
+ * @last modified on  : 10-23-2024
  * @last modified by  : Nazar Voinarovych
 **/
 
@@ -131,9 +131,7 @@ public with sharing class OpportunityTriggerHelperTest {
         List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars, True);
         
         List<Planned_Sales__c> pls=TestDataFactory.createPlannedSales(False);
-        for(Integer i=0;i<pls.size();i++){
-            
-        }
+
         insert pls.get(0);
         
         List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts,False);
