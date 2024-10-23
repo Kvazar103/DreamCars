@@ -12,7 +12,6 @@
         <members>OpportunityTriggerHelper</members>
         <members>OpportunityTriggerHelperTest</members>
         <members>OrderController</members>
-        <members>OrderTriggerHelper</members>
         <members>PlannedSalesTriggerHelper</members>
         <members>PlannedSalesTriggerHelperTest</members>
         <members>TestDataFactory</members>
@@ -32,7 +31,6 @@
         <members>ContentDocumetLinkTrigger</members>
         <members>OpportunityLineItemTrigger</members>
         <members>OpportunityTrigger</members>
-        <members>OrderTrigger</members>
         <members>PlannedSalesTrigger</members>
         <name>ApexTrigger</name>
     </types>

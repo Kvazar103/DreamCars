@@ -131,13 +131,15 @@ public with sharing class OpportunityTriggerHelperTest {
         List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars, True);
         
         List<Planned_Sales__c> pls=TestDataFactory.createPlannedSales(False);
+        for(Integer i=0;i<pls.size();i++){
+            
+        }
         insert pls.get(0);
         
         List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts,False);
         
         for(Integer i=0;i<opportunities.size();i++){
             opportunities.get(i).StageName='Closed Won';
-            opportunities.get(i).CloseDate=Date.today();
         }
         insert opportunities;
         
@@ -149,22 +151,17 @@ public with sharing class OpportunityTriggerHelperTest {
         
        for(Integer i=0;i<opportunities.size();i++){
             opportunities.get(i).StageName='Contract Sent';
-            opportunities.get(i).CloseDate=Date.today();
         }
         update opportunities;
         
         
-        Test.StopTest();
         
-        List<Opportunity> opp=[SELECT Id,Name,StageName,Amount,CloseDate,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity];
-        AggregateResult[] totalAmount=[SELECT SUM(Amount)totalAmount FROM Opportunity];
+        Test.StopTest();
+    
         Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
         
-        system.debug(newPlannedSale);
-        
-        //Assert.isTrue(opp.size()==75);
-        //Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
-        //Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,75);
+        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,0);
+        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,0);
 
     }
     

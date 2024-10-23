@@ -170,10 +170,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>OrderTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PlannedSalesTriggerHelper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
