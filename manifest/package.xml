@@ -3,12 +3,19 @@
     <types>
         <members>CarTriggerHelper</members>
         <members>CarTriggerHelperTest</members>
+        <members>CaseTriggerHelper</members>
+        <members>CaseTriggerHelperTest</members>
+        <members>ContentDocumentLinkTriggerHelper</members>
+        <members>ContentDocumentLinkTriggerHelperTest</members>
         <members>OpportunityLineItemTriggerHelper</members>
         <members>OpportunityLineItemTriggerHelperTest</members>
         <members>OpportunityTriggerHelper</members>
         <members>OpportunityTriggerHelperTest</members>
+        <members>OrderController</members>
+        <members>OrderTriggerHelper</members>
         <members>PlannedSalesTriggerHelper</members>
         <members>PlannedSalesTriggerHelperTest</members>
+        <members>TestDataFactory</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -16,9 +23,16 @@
         <name>ApexEmailNotifications</name>
     </types>
     <types>
+        <members>PreviewOfTheOrder</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
         <members>CarTrigger</members>
+        <members>CaseTrigger</members>
+        <members>ContentDocumetLinkTrigger</members>
         <members>OpportunityLineItemTrigger</members>
         <members>OpportunityTrigger</members>
+        <members>OrderTrigger</members>
         <members>PlannedSalesTrigger</members>
         <name>ApexTrigger</name>
     </types>
@@ -37,6 +51,7 @@
     </types>
     <types>
         <members>Case.Standard</members>
+        <members>Case.Web Car Service Assignmet Rule</members>
         <members>Lead.Standard</members>
         <name>AssignmentRule</name>
     </types>
@@ -44,6 +59,14 @@
         <members>Case</members>
         <members>Lead</members>
         <name>AssignmentRules</name>
+    </types>
+    <types>
+        <members>ModalWindowOrderReview</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Case.EmailNotificationToCustomer</members>
+        <name>AutoResponseRule</name>
     </types>
     <types>
         <members>Case</members>
@@ -70,6 +93,7 @@
         <members>standard__Community</members>
         <members>standard__Content</members>
         <members>standard__DataManager</members>
+        <members>standard__ExpressionSetConsole</members>
         <members>standard__FlowsApp</members>
         <members>standard__Insights</members>
         <members>standard__LightningBolt</members>
@@ -108,6 +132,10 @@
         <members>Car_Service__c.Car__c</members>
         <members>Car_Service__c.Date__c</members>
         <members>Car_Service__c.Description__c</members>
+        <members>Case.CarBrand__c</members>
+        <members>Case.CarModel__c</members>
+        <members>Case.CarVinCode__c</members>
+        <members>Case.Car_Service__c</members>
         <members>Case.EngineeringReqNumber__c</members>
         <members>Case.PotentialLiability__c</members>
         <members>Case.Product__c</members>
@@ -180,7 +208,7 @@
         <members>Product2.Weight_Kg__c</members>
         <members>Product2.Year_of_Manufacture__c</members>
         <members>Product2.reservedInOpportunity__c</members>
-        <members>Trigger_Control__c.isActive__c</members>
+        <members>Trigger_Control__c.isDisabled__c</members>
         <members>Warranty__c.Car__c</members>
         <members>Warranty__c.End_Date__c</members>
         <members>Warranty__c.Start_Date__c</members>
@@ -201,6 +229,11 @@
         <members>AccountContactRole</members>
         <members>Activity</members>
         <members>Address</members>
+        <members>AiEvalCopilotTestCaseRslt</members>
+        <members>AiEvalTestCaseCritRslt</members>
+        <members>AiEvalTestCaseResult</members>
+        <members>AiEvaluation</members>
+        <members>AiPromptBuilderGenResult</members>
         <members>AlternativePaymentMethod</members>
         <members>ApiAnomalyEventStore</members>
         <members>AppointmentCategory</members>
@@ -216,12 +249,23 @@
         <members>AssignedResource</members>
         <members>AssistantProgress</members>
         <members>AssociatedLocation</members>
+        <members>AsyncOperationTracker</members>
         <members>AuthorizationForm</members>
         <members>AuthorizationFormConsent</members>
         <members>AuthorizationFormDataUse</members>
         <members>AuthorizationFormText</members>
         <members>BusinessBrand</members>
         <members>BuyerGroup</members>
+        <members>CalcMatrixColumnRange</members>
+        <members>CalcProcStepRelationship</members>
+        <members>CalculationMatrix</members>
+        <members>CalculationMatrixColumn</members>
+        <members>CalculationMatrixRow</members>
+        <members>CalculationMatrixVersion</members>
+        <members>CalculationProcedure</members>
+        <members>CalculationProcedureStep</members>
+        <members>CalculationProcedureVariable</members>
+        <members>CalculationProcedureVersion</members>
         <members>Campaign</members>
         <members>CampaignMember</members>
         <members>Car_Feature__c</members>
@@ -270,10 +314,13 @@
         <members>CreditMemoInvApplication</members>
         <members>CreditMemoLine</members>
         <members>Customer</members>
+        <members>DTRecordsetReplica</members>
         <members>DandBCompany</members>
-        <members>DataKitDeploymentLog</members>
+        <members>DataMaskCustomValueLibrary</members>
         <members>DataUseLegalBasis</members>
         <members>DataUsePurpose</members>
+        <members>DecisionTblFileImportData</members>
+        <members>DeliveryEstimationSetup</members>
         <members>DigitalWallet</members>
         <members>DuplicateRecordItem</members>
         <members>DuplicateRecordSet</members>
@@ -287,12 +334,15 @@
         <members>ExchangeUserMapping</members>
         <members>ExpressionFilter</members>
         <members>ExpressionFilterCriteria</members>
+        <members>ExpressionSet</members>
+        <members>ExpressionSetVersion</members>
         <members>ExternalEventMapping</members>
         <members>Feature__c</members>
         <members>FeedItem</members>
         <members>FinanceBalanceSnapshot</members>
         <members>FinanceTransaction</members>
         <members>FlowOrchestrationInstance</members>
+        <members>FlowOrchestrationLog</members>
         <members>FlowOrchestrationStageInstance</members>
         <members>FlowOrchestrationStepInstance</members>
         <members>FlowOrchestrationWorkItem</members>
@@ -320,6 +370,7 @@
         <members>Location</members>
         <members>LocationGroup</members>
         <members>LocationGroupAssignment</members>
+        <members>LocationShippingCarrierMethod</members>
         <members>MLModel</members>
         <members>MLModelFactor</members>
         <members>MLModelFactorComponent</members>
@@ -355,8 +406,6 @@
         <members>Planned_Sales__c</members>
         <members>Pricebook2</members>
         <members>PricebookEntry</members>
-        <members>PrivacyJobSession</members>
-        <members>PrivacyPolicy</members>
         <members>PrivacyRTBFRequest</members>
         <members>Problem</members>
         <members>ProblemIncident</members>
@@ -394,6 +443,8 @@
         <members>ReturnOrderItemAdjustment</members>
         <members>ReturnOrderItemTax</members>
         <members>ReturnOrderLineItem</members>
+        <members>RevenueAsyncOperation</members>
+        <members>RevenueTransactionErrorLog</members>
         <members>SalesStore</members>
         <members>Scorecard</members>
         <members>ScorecardAssociation</members>
@@ -433,6 +484,7 @@
         <members>Trigger_Control__c</members>
         <members>User</members>
         <members>UserExternalCredential</members>
+        <members>UserLocalWebServerIdentity</members>
         <members>UserPrioritizedRecord</members>
         <members>UserProvisioningRequest</members>
         <members>VoiceCall</members>
@@ -487,11 +539,23 @@
         <name>Dashboard</name>
     </types>
     <types>
+        <members>enablement/sfdcEnablement_EnablementWorkspace.sfdc_cms__languageSettings/languages</members>
+        <name>DigitalExperience</name>
+    </types>
+    <types>
+        <members>enablement/sfdcEnablement_EnablementWorkspace</members>
+        <name>DigitalExperienceBundle</name>
+    </types>
+    <types>
         <members>Account.Standard_Account_Duplicate_Rule</members>
         <members>Account.Standard_Person_Account_Duplicate_Rule</members>
         <members>Contact.Standard_Contact_Duplicate_Rule</members>
         <members>Lead.Standard_Lead_Duplicate_Rule</members>
         <name>DuplicateRule</name>
+    </types>
+    <types>
+        <members>EmailToCase</members>
+        <name>EmailServicesFunction</name>
     </types>
     <types>
         <members>unfiled$public</members>
@@ -517,6 +581,7 @@
         <members>unfiled$public/SupportEscalatedCaseReassignment</members>
         <members>unfiled$public/SupportSelfServiceNewLoginandPassword</members>
         <members>unfiled$public/SupportSelfServiceResetPassword</members>
+        <members>unfiled$public/Support_Case_created_Web_Car_Service</members>
         <name>EmailTemplate</name>
     </types>
     <types>
@@ -532,24 +597,33 @@
         <name>EscalationRules</name>
     </types>
     <types>
+        <members>Product2.For_Comparer</members>
+        <name>FieldSet</name>
+    </types>
+    <types>
         <members>Account_Record_Page</members>
         <members>ContactCenter_UtilityBar</members>
         <members>CrisisCenter_UtilityBar</members>
         <members>Dream_Cars_UtilityBar</members>
+        <members>ExpressionSetConsole_UtilityBar</members>
         <members>FlowsApp_UtilityBar</members>
         <members>Home</members>
         <members>LightningSalesConsole_UtilityBar</members>
         <members>LightningSales_UtilityBar</members>
         <members>LightningService_UtilityBar</members>
         <members>Opportunity_Record_Page</members>
+        <members>PricingPulse_UtilityBar</members>
         <members>RevenueCloudConsole_UtilityBar</members>
+        <members>SalesCloudMobile_UtilityBar</members>
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Send_Email_To_Group_Members</members>
         <members>Unique_Planned_Sales_Record_Constraint</members>
         <name>Flow</name>
     </types>
     <types>
+        <members>Send_Email_To_Group_Members</members>
         <members>Unique_Planned_Sales_Record_Constraint</members>
         <name>FlowDefinition</name>
     </types>
@@ -557,6 +631,10 @@
         <members>Car_Type</members>
         <members>Condition</members>
         <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>Sales_Users_public_group</members>
+        <name>Group</name>
     </types>
     <types>
         <members>DE Default</members>
@@ -582,11 +660,22 @@
         <members>AssignedResource-Assigned Resource Layout</members>
         <members>AssociatedLocation-Associated Location Layout</members>
         <members>AsyncOperationLog-Async Operation Log Layout</members>
+        <members>AsyncOperationTracker-Async Operation Tracker Layout</members>
         <members>AuthorizationForm-Authorization Form Layout</members>
         <members>AuthorizationFormConsent-Authorization Form Consent Layout</members>
         <members>AuthorizationFormDataUse-Authorization Form Data Use Layout</members>
         <members>AuthorizationFormText-Authorization Form Text Layout</members>
         <members>BusinessBrand-Business Brand Layout</members>
+        <members>CalcMatrixColumnRange-Decision Matrix Column Range Layout</members>
+        <members>CalcProcStepRelationship-Expression Set Step Relationship Layout</members>
+        <members>CalculationMatrix-Decision Matrix Layout</members>
+        <members>CalculationMatrixColumn-Decision Matrix Column Layout</members>
+        <members>CalculationMatrixRow-Decision Matrix Row Layout</members>
+        <members>CalculationMatrixVersion-Decision Matrix Version Layout</members>
+        <members>CalculationProcedure-Calculation Procedure Layout</members>
+        <members>CalculationProcedureStep-Calculation Procedure Step Layout</members>
+        <members>CalculationProcedureVariable-Calculation Procedure Variable Layout</members>
+        <members>CalculationProcedureVersion-Calculation Procedure Version Layout</members>
         <members>Campaign-Campaign Layout</members>
         <members>CampaignMember-Campaign Member Page Layout</members>
         <members>Car_Feature__c-Car Feature Layout</members>
@@ -633,6 +722,8 @@
         <members>Entitlement-Entitlement Layout</members>
         <members>EntityMilestone-Object Milestone Layout</members>
         <members>Event-Event Layout</members>
+        <members>ExpressionSet-Expression Set Layout</members>
+        <members>ExpressionSetVersion-Expression Set Version Layout</members>
         <members>Feature__c-Feature Layout</members>
         <members>FeedItem-Feed Item Layout</members>
         <members>FinanceBalanceSnapshot-Finance Balance Snapshot Layout</members>
@@ -662,6 +753,7 @@
         <members>Opportunity-Opportunity %28Sales%29 Layout</members>
         <members>Opportunity-Opportunity %28Support%29 Layout</members>
         <members>Opportunity-Opportunity Layout</members>
+        <members>OpportunityContactRole-Opportunity Contact Role Layout</members>
         <members>OpportunityLineItem-Opportunity Product Layout</members>
         <members>Order-Order Layout</members>
         <members>OrderItem-Order Product Layout</members>
@@ -692,6 +784,8 @@
         <members>ReturnOrderItemAdjustment-Return Order Item Adjustment Layout</members>
         <members>ReturnOrderItemTax-Return Order Item Tax Layout</members>
         <members>ReturnOrderLineItem-Return Order Line Item Layout</members>
+        <members>RevenueAsyncOperation-Revenue Async Operation Layout</members>
+        <members>RevenueTransactionErrorLog-Revenue Transaction Error Log Layout</members>
         <members>Scorecard-Scorecard Layout</members>
         <members>ScorecardAssociation-Scorecard Association Layout</members>
         <members>ScorecardMetric-Scorecard Metric Layout</members>
@@ -716,6 +810,7 @@
         <members>ThreatDetectionFeedback-Threat Detection Feedback Layout</members>
         <members>TimeSlot-Time Slot Layout</members>
         <members>User-User Layout</members>
+        <members>UserAlt-User Profile Layout</members>
         <members>UserProvAccount-User Provisioning Account Layout</members>
         <members>UserProvisioningLog-User Provisioning Log Layout</members>
         <members>UserProvisioningRequest-User Provisioning Request Layout</members>
@@ -761,6 +856,8 @@
         <members>BusinessBrand.All_BusinessBrands</members>
         <members>BuyerGroup.All_Buyer_Groups</members>
         <members>BuyerGroup.My_Buyer_Groups</members>
+        <members>CalculationMatrix.All_CalculationMatrices</members>
+        <members>CalculationProcedure.All_CalculationProcedures</members>
         <members>Campaign.AllActiveCampaigns</members>
         <members>Campaign.MyActiveCampaigns</members>
         <members>Car_Feature__c.All</members>
@@ -770,6 +867,7 @@
         <members>Case.AllOpenCases</members>
         <members>Case.MyCases</members>
         <members>Case.MyOpenCases</members>
+        <members>Case.Service_Cases_Case</members>
         <members>CollaborationGroup.All_ChatterGroups</members>
         <members>CommSubscription.All_CommSubscriptions</members>
         <members>CommSubscriptionChannelType.All_CommSubscriptionChannelTypes</members>
@@ -799,6 +897,7 @@
         <members>Coupon.ALL_Coupons</members>
         <members>CreditMemo.mine</members>
         <members>Customer.All_Customers</members>
+        <members>DataMaskCustomValueLibrary.All_DataMaskCustomValueLibraries</members>
         <members>DataUseLegalBasis.All_DataUseLegalBases</members>
         <members>DataUsePurpose.All_DataUsePurposes</members>
         <members>DigitalWallet.DigitalWallet</members>
@@ -811,6 +910,8 @@
         <members>Event.MyTeamsUpcomingEvents</members>
         <members>Event.MyUpcomingEvents</members>
         <members>Event.TodaysAgenda</members>
+        <members>ExpressionSet.All_DiscoveryProcedures</members>
+        <members>ExpressionSet.All_ExpressionSets</members>
         <members>Feature__c.All</members>
         <members>FinanceBalanceSnapshot.mine</members>
         <members>FinanceTransaction.mine</members>
@@ -1024,8 +1125,13 @@
         <name>ProfileSessionSetting</name>
     </types>
     <types>
+        <members>Service_Cases</members>
+        <name>Queue</name>
+    </types>
+    <types>
         <members>Case.LogACall</members>
         <members>Case.NewChildCase</members>
+        <members>Case.SendEmail</members>
         <members>CollaborationGroup.NewGroupMember</members>
         <members>CollaborationGroup.NewGroupRecord</members>
         <members>FeedItem.NewTaskFromFeedItem</members>
@@ -1039,6 +1145,7 @@
         <members>NewNote</members>
         <members>NewOpportunity</members>
         <members>NewTask</members>
+        <members>Opportunity.Generate_Order</members>
         <members>SendEmail</members>
         <members>Task.Defer</members>
         <members>Task.EditDescription</members>
@@ -1146,6 +1253,7 @@
         <members>Actions</members>
         <members>Activities</members>
         <members>Address</members>
+        <members>AgentforceForDevelopers</members>
         <members>Ai4m</members>
         <members>Analytics</members>
         <members>Apex</members>
@@ -1203,7 +1311,9 @@
         <members>IdentityProvider</members>
         <members>IncidentMgmt</members>
         <members>Industries</members>
+        <members>IndustriesContext</members>
         <members>IndustriesEinsteinFeature</members>
+        <members>IndustriesPricing</members>
         <members>InvLatePymntRiskCalc</members>
         <members>Inventory</members>
         <members>InvocableAction</members>
@@ -1233,6 +1343,7 @@
         <members>PardotEinstein</members>
         <members>PartyDataModel</members>
         <members>PathAssistant</members>
+        <members>Payments</members>
         <members>PaymentsManagementEnabled</members>
         <members>Picklist</members>
         <members>PlatformEncryption</members>
@@ -1241,6 +1352,7 @@
         <members>PredictionBuilder</members>
         <members>Privacy</members>
         <members>Product</members>
+        <members>ProductDiscovery</members>
         <members>QuickText</members>
         <members>Quote</members>
         <members>RealTimeEvent</members>
@@ -1274,17 +1386,22 @@
         <members>Account</members>
         <members>ActivityRecurrence2</members>
         <members>ActivityRecurrence2Exception</members>
+        <members>AiEvaluation</members>
+        <members>AiPromptBuilderGenResult</members>
         <members>AlternativePaymentMethod</members>
         <members>AppointmentInvitation</members>
         <members>Asset</members>
         <members>AssistantInteraction</members>
         <members>AssistantProgress</members>
         <members>AssistantRecommendation</members>
+        <members>AsyncOperationTracker</members>
         <members>AuthorizationForm</members>
         <members>AuthorizationFormConsent</members>
         <members>AuthorizationFormDataUse</members>
         <members>BusinessBrand</members>
         <members>BuyerGroup</members>
+        <members>CalculationMatrix</members>
+        <members>CalculationProcedure</members>
         <members>CalendarModel</members>
         <members>CalendarView</members>
         <members>Campaign</members>
@@ -1307,11 +1424,15 @@
         <members>CouponCodeRedemption</members>
         <members>CreditMemo</members>
         <members>Customer</members>
-        <members>DataKitDeploymentLog</members>
+        <members>DTRecordsetReplica</members>
+        <members>DataMaskCustomValueLibrary</members>
         <members>DataUseLegalBasis</members>
         <members>DataUsePurpose</members>
+        <members>DecisionTblFileImportData</members>
+        <members>DeliveryEstimationSetup</members>
         <members>EngagementChannelType</members>
         <members>ExchangeUserMapping</members>
+        <members>ExpressionSet</members>
         <members>ExternalEventMapping</members>
         <members>Feature__c</members>
         <members>FinanceBalanceSnapshot</members>
@@ -1336,6 +1457,7 @@
         <members>ListEmail</members>
         <members>Location</members>
         <members>LocationGroup</members>
+        <members>LocationShippingCarrierMethod</members>
         <members>Macro</members>
         <members>MacroUsage</members>
         <members>MessagingEndUser</members>
@@ -1365,6 +1487,7 @@
         <members>RecordMergeHistory</members>
         <members>ReportResultBlob</members>
         <members>ReturnOrder</members>
+        <members>RevenueTransactionErrorLog</members>
         <members>Scorecard</members>
         <members>Seller</members>
         <members>ServiceAppointment</members>
@@ -1388,6 +1511,7 @@
         <members>UserDefinedLabelAssignment</members>
         <members>UserEmailPreferredPerson</members>
         <members>UserExternalCredential</members>
+        <members>UserLocalWebServerIdentity</members>
         <members>UserPrioritizedRecord</members>
         <members>UserProvisioningRequest</members>
         <members>VoiceCall</members>
@@ -1466,6 +1590,10 @@
         <name>StandardValueSet</name>
     </types>
     <types>
+        <members>Copart_icon</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
         <members>Account</members>
         <members>Asset</members>
         <members>Campaign</members>
@@ -1526,6 +1654,7 @@
         <members>Campaign.ViewCampaignInfluenceReport</members>
         <members>Case.UpsellCrosssellOpportunity</members>
         <members>Opportunity.DeliveryStatus</members>
+        <members>Opportunity.View_PDF</members>
         <name>WebLink</name>
     </types>
     <types>

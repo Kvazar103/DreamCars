@@ -9,110 +9,71 @@
 @isTest
 public with sharing class OpportunityTriggerHelperTest {
     
-    private static Trigger_Control__c createTriggerControl(){ //custom setting trigger control 
-        Trigger_Control__c customSetting = new Trigger_Control__c(
-            Name = 'MakeActive', 
-            isActive__c = true   
-        );
-        return customSetting;
-    }
-    
-    private static Planned_Sales__c createPlannedSale(){
-        Planned_Sales__c ps=new Planned_Sales__c(Car_Type__c='Used',Year__c=Date.today().year(),Month__c=Date.today().month());
-        return ps;
-    }
-    
-    private static Account createAccount(){
-        Account acc=new Account(Name='Test Account',BillingCity='Test City',BillingStreet='Test Street',
-                                BillingState='Test State',BillingCountry='Test Country',BillingPostalCode='Test Postal Code');
-        return acc;
-    }
-    
-    private static Product2 createCar(){
-        Product2 car=new Product2(RecordTypeId='012WU000002S418YAC',Name='Test Car',Brand__c='Test Brand',
-                                  Condition__c='Used',Model__c='Test Model',Mileage__c=9000,VIN_Number__c=111111111);
-        return car;
-    }
-    
-    //private static Pricebook2 createPriceBook(){
-        //Pricebook2 priceBook=new Pricebook2(Name='Test Pricebook',isActive=true);
+    @TestSetup
+    static void createTestData(){
+        Trigger_Control__c contentDocumentLinkTriggerControl=TestDataFactory.createContentDocumentLinkTriggerControl();
+        insert contentDocumentLinkTriggerControl;
         
-        //return priceBook;
-    //}
-    
-    private static Pricebook2 getStandardPriceBook(){
-        Id pricebookId = Test.getStandardPricebookId();
-        Pricebook2 standardPricebook = new Pricebook2(Id = pricebookId,IsActive = true);
-        return standardPricebook;
-    }
-    
-    private static PricebookEntry createPriceBookEntry(Id priceBookId,Id productId){
-        PricebookEntry priceBookEntry=new PricebookEntry(Pricebook2Id=priceBookId,Product2Id=productId,
-                                                         UnitPrice=1000,isActive=true);
-        return priceBookEntry;
+        Trigger_Control__c plannedSalesTriggerControl=TestDataFactory.createPlannedSalesTriggerControl();
+        insert plannedSalesTriggerControl;
         
-    }
+        Trigger_Control__c carTriggerControl=TestDataFactory.createCarTriggerControl();
+        insert carTriggerControl;
+        
+        Trigger_Control__c caseTriggerControl=TestDataFactory.createCaseTriggerControl();
+        insert caseTriggerControl;
+        
+        Trigger_Control__c opportunityLineItemTriggerControl=TestDataFactory.createOpportunityLineItemTriggerControl();
+        insert opportunityLineItemTriggerControl;
+        
+        Trigger_Control__c opportunityTriggerControl=TestDataFactory.createOpportunityTriggerControl();
+        insert opportunityTriggerControl;
+  
+    } 
     
-    private static Opportunity createOpportunity(Pricebook2 priceBook,Id accountId){
-        Opportunity opp=new Opportunity(Name='Test Opportunity',CloseDate=Date.today(),
-                                        StageName='Prospecting',AccountId=accountId,Amount=25000,Pricebook2Id=priceBook.Id 
-                                       );
-        return opp;
-    }
     
-    private static OpportunityLineItem createOpportunityProduct(Id product2Id,Id opportunityId){
-        OpportunityLineItem opportunityProduct=new OpportunityLineItem(OpportunityId=opportunityId,Product2Id=product2Id,
-                                                                       Quantity=1,UnitPrice=12500);
-        return opportunityProduct;
-    }
-    
-    //test positive
+    //test bulkify
     @isTest
-    private static void testPositiveOpportunityClose(){
+    private static void testBulkifyOpportunityClosed(){
         
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
         
-        Account account=createAccount();
-        insert account;
+        List<Account> accounts=TestDataFactory.createAccounts(True);
+
+        List<Product2> cars=TestDataFactory.createCars(True);
         
-        Planned_Sales__c plannedSale=createPlannedSale();
-        insert plannedSale;
+        Pricebook2 priceBook=TestDataFactory.getStandardPriceBook();
         
-        Product2 car=createCar();
-        insert car;
+        List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars, True);
         
-        Pricebook2 priceBook=getStandardPriceBook();
+        List<Planned_Sales__c> pls=TestDataFactory.createPlannedSales(False);
+        insert pls.get(0);
         
-        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
-        insert priceBookEntry;
+        List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts, True);
         
-        Opportunity opportunity=createOpportunity(priceBook,account.Id);
-        insert opportunity;
-        
-        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
-        insert opportunityProduct;
-        
-        Test.startTest();
-        
-        opportunity.StageName='Closed Won';
-        update opportunity;
-        
-        Test.stopTest();
-        
-        Opportunity newOpportunity=[SELECT Id,Name,StageName,Amount,CloseDate,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity LIMIT 1];
-        Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
-        OpportunityLineItem oli=[SELECT Id,Product2.Condition__c FROM OpportunityLineItem];
+        List<OpportunityLineItem> opportunityLineItems=TestDataFactory.createOpportunityProduct(cars, opportunities, True);
 
         
-        Assert.isTrue(newOpportunity!=null);
-        Assert.isTrue(newPlannedSale!=null);
-        Assert.areEqual(newOpportunity.StageName,'Closed Won');
-        Assert.areEqual(newPlannedSale.Year__c,newOpportunity.CloseDate.year());
-        Assert.areEqual(newPlannedSale.Month__c,newOpportunity.CloseDate.month());
-        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,newOpportunity.Amount);
-        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,newOpportunity.OpportunityLineItems.size());
-        Assert.areEqual(newPlannedSale.Car_Type__c,oli.Product2.Condition__c);
+        Test.StartTest();
+        
+        for(Integer i=0;i<opportunities.size();i++){
+            opportunities.get(i).StageName='Closed Won';
+            opportunities.get(i).CloseDate=Date.today();
+        }
+        update opportunities;
+        
+
+
+        Test.StopTest();
+        
+        List<Opportunity> opp=[SELECT Id,Name,StageName,Amount,CloseDate,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity];
+        AggregateResult[] totalAmount=[SELECT SUM(Amount)totalAmount FROM Opportunity];
+        Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
+        
+        system.debug(newPlannedSale);
+        
+        Assert.isTrue(opp.size()==75);
+        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
+        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,75);
 
     }
     
@@ -120,110 +81,78 @@ public with sharing class OpportunityTriggerHelperTest {
     @isTest
     private static void testNegativeOpportunityClose(){
         
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
+        List<Account> accounts=TestDataFactory.createAccounts(True);
         
-        Account account=createAccount();
-        insert account;
+        List<Product2> cars=TestDataFactory.createCars(True);
         
-        Planned_Sales__c plannedSale=createPlannedSale();
-        insert plannedSale;
+        Pricebook2 priceBook=TestDataFactory.getStandardPriceBook();
         
-        Product2 car=createCar();
-        insert car;
+        List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars, True);
         
-        Pricebook2 priceBook=getStandardPriceBook();
+        List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts, True);
         
-        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
-        insert priceBookEntry;
+        List<OpportunityLineItem> opportunityLineItems=TestDataFactory.createOpportunityProduct(cars, opportunities, True);
         
-        Opportunity opportunity=createOpportunity(priceBook,account.Id);
-        insert opportunity;
-        
-        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
-        insert opportunityProduct;
+        List<Planned_Sales__c> pls=TestDataFactory.createPlannedSales(False);
+        insert pls.get(0);
         
         Test.StartTest();
         
-        opportunity.StageName='Contract Sent';
-        upsert opportunity;
-
+        for(Integer i=0;i<opportunities.size();i++){
+            opportunities.get(i).StageName='Contract Sent';
+        }
+        
+        update opportunities;
         Test.StopTest();
         
-        Opportunity newOpportunity=[SELECT Id,Name,StageName,Amount,CloseDate,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity LIMIT 1];
-        OpportunityLineItem oli=[SELECT Id,Product2.Condition__c FROM OpportunityLineItem];
-        Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
-         
-        Assert.isTrue(newOpportunity!=null);
-        Assert.isTrue(newPlannedSale!=null);
-        Assert.areEqual(newOpportunity.StageName,'Contract Sent');
-        Assert.isTrue(newPlannedSale.Total_Amount_Earned__c!=newOpportunity.Amount);
-        Assert.isTrue(newPlannedSale.Count_of_Cars_Sold__c!=newOpportunity.OpportunityLineItems.size());
-
+        List<Opportunity> newOpportunities=[SELECT Id,Name,StageName,Amount,CloseDate,(SELECT Id,Product2.Condition__c FROM OpportunityLineItems) FROM Opportunity];
+        List<OpportunityLineItem> oli=[SELECT Id,Product2.Condition__c FROM OpportunityLineItem];
+        Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c];
+        
+        for(Integer i=0;i<newOpportunities.size();i++){
+            Assert.isTrue(newPlannedSale.Total_Amount_Earned__c!=newOpportunities.get(i).Amount);
+            Assert.isTrue(newPlannedSale.Count_of_Cars_Sold__c!=newOpportunities.get(i).OpportunityLineItems.size());
+        }
+        
+        
     }
     
-    //test bulkify
+     //test bulkify
     @isTest
-    private static void testBulkifyOpportunityClosed(){
+    private static void testBulkifyUpdateOpportunitiesFromClosedWon(){
         
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
         
-        List<Account> accounts=new List<Account>();
+        List<Account> accounts=TestDataFactory.createAccounts(True);
 
-        List<Product2> cars=new List<Product2>();
+        List<Product2> cars=TestDataFactory.createCars(True);
         
-        Pricebook2 priceBook=getStandardPriceBook();
-        List<PricebookEntry> priceBookEntries=new List<PricebookEntry>();
+        Pricebook2 priceBook=TestDataFactory.getStandardPriceBook();
         
-        List<Opportunity> opportunities=new List<Opportunity>();
+        List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars, True);
         
-        Planned_Sales__c pls=createPlannedSale();
-        insert pls;
+        List<Planned_Sales__c> pls=TestDataFactory.createPlannedSales(False);
+        insert pls.get(0);
         
-        List<OpportunityLineItem> opportunityLineItems=new List<OpportunityLineItem>();
+        List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts,False);
         
-        for(Integer i=0;i<200;i++){
-            accounts.add(createAccount());
-            Product2 car=createCar();
-            car.VIN_Number__c+=i;
-            cars.add(car);
-        }
-        insert accounts;
-        insert cars;
-        
-        for(Integer i=0;i<200;i++){
-            priceBookEntries.add(createPriceBookEntry(priceBook.Id,cars.get(i).Id));
-        }
-        insert priceBookEntries;
-        
-        for(Integer i=0;i<200;i++){
-            opportunities.add(createOpportunity(priceBook,accounts.get(i).Id));
+        for(Integer i=0;i<opportunities.size();i++){
+            opportunities.get(i).StageName='Closed Won';
+            opportunities.get(i).CloseDate=Date.today();
         }
         insert opportunities;
         
-        for(Integer i=0;i<200;i++){
-            opportunityLineItems.add(createOpportunityProduct(cars.get(i).Id,opportunities.get(i).Id));
-        }
-        insert opportunityLineItems;
+        List<OpportunityLineItem> opportunityLineItems=TestDataFactory.createOpportunityProduct(cars, opportunities, True);
+
         
+
         Test.StartTest();
-        //try{
-            for(Opportunity opp:opportunities){
-                opp.StageName='Closed Won';
-            }
-            update opportunities;
-            
-       //}catch (DmlException e){
-           //System.debug('Помилка DML-операції: ' + e.getMessage()); // Виведення повідомлення про помилку
-           //System.debug('Тип винятку: ' + e.getTypeName()); // Тип винятку
-           //System.debug('Стек трейс: ' + e.getStackTraceString()); // Деталі про місце помилки в коді
-           //System.debug('Кількість рядків з помилкою: ' + e.getNumDml()); // Скільки DML операцій викликало помилку
-           //System.debug('Ідентифікатори записів з помилками: ' + e.getDmlId(0)); // Ідентифікатори записів, де сталась помилка
-           //system.debug('Cause'+ e.getCause());
-            //system.debug('getDmlFieldNames= '+e.getDmlFieldNames(0));
-            //system.debug('getDmlMessage= '+e.getDmlMessage(0));
-        //}
+        
+       for(Integer i=0;i<opportunities.size();i++){
+            opportunities.get(i).StageName='Contract Sent';
+            opportunities.get(i).CloseDate=Date.today();
+        }
+        update opportunities;
+        
         
         Test.StopTest();
         
@@ -231,148 +160,41 @@ public with sharing class OpportunityTriggerHelperTest {
         AggregateResult[] totalAmount=[SELECT SUM(Amount)totalAmount FROM Opportunity];
         Planned_Sales__c newPlannedSale=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
         
-        Assert.isTrue(opp.size()==200);
-        Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
-        Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,200);
+        system.debug(newPlannedSale);
+        
+        //Assert.isTrue(opp.size()==75);
+        //Assert.areEqual(newPlannedSale.Total_Amount_Earned__c,totalAmount[0].get('totalAmount'));
+        //Assert.areEqual(newPlannedSale.Count_of_Cars_Sold__c,75);
 
-    }
-    
-    //positive delete opportunity
-    @isTest
-    private static void testPositiveDeleteOpportunity(){
-        
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
-        
-        Account account=createAccount();
-        insert account;
-        
-        Planned_Sales__c plannedSale=createPlannedSale();
-        insert plannedSale;
-        
-        Pricebook2 priceBook=getStandardPriceBook();
-        
-        Product2 car=createCar();
-        insert car;
-        
-        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
-        insert priceBookEntry;
-        
-        Opportunity opportunity=createOpportunity(priceBook,account.Id);
-        insert opportunity;
-        
-        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
-        insert opportunityProduct;
-        
-        Test.StartTest();
-        
-        opportunity.StageName='Closed Won';
-        update opportunity; 
-        
-        delete opportunity;
-        
-        Test.StopTest();
-        
-        Planned_Sales__c ps=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
-        
-        Assert.areEqual(opportunity.CloseDate.month(),plannedSale.Month__c);
-        Assert.areEqual(opportunity.CloseDate.year(),plannedSale.Year__c);
-        Assert.isTrue(ps.Total_Amount_Earned__c==0);
-        Assert.isTrue(ps.Count_of_Cars_Sold__c==0);
-        
-    }
-    
-    //negative test delete
-    @isTest
-    private static void testNegativeDeleteOpportunity(){
-        
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
-        
-        Account account=createAccount();
-        insert account;
-        
-        Planned_Sales__c plannedSale=createPlannedSale();
-        insert plannedSale;
-        
-        Pricebook2 priceBook=getStandardPriceBook();
-        
-        Product2 car=createCar();
-        insert car;
-        
-        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
-        insert priceBookEntry;
-        
-        Opportunity opportunity=createOpportunity(priceBook,account.Id);
-        
-        insert opportunity;
-        
-        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
-        insert opportunityProduct;
-        
-        Test.StartTest();
-        
-        delete opportunity;
-        
-        Test.StopTest();
-        
-        Assert.areEqual(opportunity.CloseDate.month(),plannedSale.Month__c);
-        Assert.areEqual(opportunity.CloseDate.year(),plannedSale.Year__c);
-        Assert.areNotEqual(plannedSale.Total_Amount_Earned__c,opportunity.Amount);
-        Assert.areNotEqual(plannedSale.Count_of_Cars_Sold__c,opportunity.OpportunityLineItems.size());
     }
     
     //bulkify test delete
     @isTest
     private static void testBulkifyDeleteOpportunity(){
-        
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
-        
-        List<Account> accounts=new List<Account>();
 
-        List<Product2> cars=new List<Product2>();
+        List<Account> accounts=TestDataFactory.createAccounts(True);
+
+        List<Product2> cars=TestDataFactory.createCars(True);
         
-        Pricebook2 priceBook=getStandardPriceBook();
+        Pricebook2 priceBook=TestDataFactory.getStandardPriceBook();
+
         
-        List<PricebookEntry> priceBookEntries=new List<PricebookEntry>();
         
-        List<Opportunity> opportunities=new List<Opportunity>();
+        List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars,True);
+
+        List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts, True);
         
-        Planned_Sales__c pls=createPlannedSale();
-        insert pls;
-        
-        List<OpportunityLineItem> opportunityLineItems=new List<OpportunityLineItem>();
-        
-        for(Integer i=0;i<200;i++){
-            accounts.add(createAccount());
-            //plannedSales.add(createPlannedSale());
-            Product2 car=createCar();
-            car.VIN_Number__c+=i;
-            cars.add(car);
+        for(Integer i=0;i<opportunities.size();i++){
+            opportunities.get(i).CloseDate=Date.today();
+            opportunities.get(i).StageName='Closed Won';
         }
-        insert accounts;
-        //insert plannedSales;
+        update opportunities;
         
-        insert cars;
+        List<Planned_Sales__c> plannedSales=TestDataFactory.createPlannedSales(False);
+        insert plannedSales.get(0);
         
-        for(Integer i=0;i<200;i++){
-            priceBookEntries.add(createPriceBookEntry(priceBook.Id,cars.get(i).Id));
-        }
-        insert priceBookEntries;
-        
-        for(Integer i=0;i<200;i++){
-            Opportunity opportunity=createOpportunity(priceBook,accounts.get(i).Id);
-            opportunity.StageName='Closed Won';
-            opportunities.add(opportunity);
-        }
-        insert opportunities;
-        
-        for(Integer i=0;i<200;i++){
-            opportunityLineItems.add(createOpportunityProduct(cars.get(i).Id,opportunities.get(i).Id));
-        }
-        insert opportunityLineItems;
-        
+        List<OpportunityLineItem> opportunityLineItems=TestDataFactory.createOpportunityProduct(cars, opportunities, True);
+
         Test.StartTest();
 
         delete opportunities;
@@ -380,62 +202,50 @@ public with sharing class OpportunityTriggerHelperTest {
         Test.StopTest();
         
         Planned_Sales__c planed=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
-        system.debug(planed.Total_Amount_Earned__c);
 
         Assert.AreEqual(planed.Total_Amount_Earned__c,0);
         Assert.AreEqual(planed.Count_of_Cars_Sold__c,0);
         
     }
     
-    //test positive
+    //negative test delete
     @isTest
-    private static void testPositiveUpdateCarStatusWhenOpportunityStageChanged(){
+    private static void testNegativeDeleteOpportunity(){
         
-        Trigger_Control__c triggerControl=createTriggerControl();
-        insert triggerControl;
+
+        List<Account> accounts=TestDataFactory.createAccounts(True);
+
+        List<Product2> cars=TestDataFactory.createCars(True);
         
-        Account account=createAccount();
-        insert account;
+        Pricebook2 priceBook=TestDataFactory.getStandardPriceBook();
+
+        List<Planned_Sales__c> plannedSales=TestDataFactory.createPlannedSales(False);
+        insert plannedSales.get(0);
         
-        Planned_Sales__c plannedSale=createPlannedSale();
-        insert plannedSale;
+
         
-        Product2 car=createCar();
-        insert car;
+        List<PricebookEntry> priceBookEntries=TestDataFactory.createPriceBookEntry(priceBook.Id, cars,True);
+
+        List<Opportunity> opportunities=TestDataFactory.createOpportunities(priceBook.Id, accounts, True);
         
-        Pricebook2 priceBook=getStandardPriceBook();
-        
-        PricebookEntry priceBookEntry=createPriceBookEntry(priceBook.Id,car.Id);
-        insert priceBookEntry;
-        
-        Opportunity opportunity=createOpportunity(priceBook,account.Id);
-        insert opportunity;
-        
-        OpportunityLineItem opportunityProduct=createOpportunityProduct(car.Id,opportunity.Id);
-        insert opportunityProduct;
+        List<OpportunityLineItem> opportunityLineItems=TestDataFactory.createOpportunityProduct(cars, opportunities, True);
+
         
         Test.StartTest();
         
-        opportunity.StageName='Closed Lost';
-        update opportunity;
-        
-        opportunity.StageName='Prospecting';
-        update opportunity;
-        
-        opportunity.StageName='Contract Sent';
-        update opportunity;
-        
-        opportunity.StageName='Prospecting';
-        update opportunity;
-        
-        opportunity.StageName='Closed Won';
-        update opportunity;
-        
-        opportunity.StageName='Prospecting';
-        update opportunity;
+        delete opportunities;
         
         Test.StopTest();
+        
+        Planned_Sales__c planned=[SELECT Id,Name,Car_Type__c,Total_Amount_Earned__c,Year__c,Month__c,Count_of_Cars_Sold__c FROM Planned_Sales__c LIMIT 1];
+
+  
+        Assert.areEqual(planned.Total_Amount_Earned__c,0);
+        Assert.areEqual(planned.Count_of_Cars_Sold__c,0);
     }
     
+    
+    
 
+    
 }

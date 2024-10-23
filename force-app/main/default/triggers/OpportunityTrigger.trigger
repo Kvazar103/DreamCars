@@ -1,28 +1,25 @@
 trigger OpportunityTrigger on Opportunity (after update,before delete) {
     
-    Trigger_Control__c triggerSetting=Trigger_Control__c.getInstance('MakeActive');  
+    Trigger_Control__c triggerSetting=Trigger_Control__c.getInstance('OpportunityTriggerSettings');  
     
-    if((triggerSetting!=null) && (triggerSetting.isActive__c)){
-        
-        try{
-            if(Schema.sObjectType.Opportunity.isAccessible()){ //if user have access to object and fields
-                if(Trigger.isUpdate && Trigger.isAfter){
-                    OpportunityTriggerHelper.updatePlannedSalesWhenOpportunityClosedWon();
-                    OpportunityTriggerHelper.updateCarStatusWhenOpportunityStageChanged(Trigger.oldMap);
-                }else if(Trigger.isDelete && Trigger.isBefore){
-                    OpportunityTriggerHelper.deleteOpportunity();
-                }
-            }else{
-                system.debug('The user doesnt have access to this object');
+    if((triggerSetting!=null)&&(triggerSetting.isDisabled__c==false)){
+        if(Schema.sObjectType.Opportunity.isAccessible()){ //if user have access to object and fields
+            if(Trigger.isUpdate && Trigger.isAfter){
+                //OpportunityTriggerHelper.updatePlannedSalesWhenOpportunityClosedWon();
+                OpportunityTriggerHelper.updatePlannedSalesWhenOpportunityClosedWonOrDeleted(Trigger.new,False);
+                OpportunityTriggerHelper.updateCarStatusWhenOpportunityStageChanged();
+            }else if(Trigger.isDelete && Trigger.isBefore){
+                //OpportunityTriggerHelper.deleteOpportunity();
+                OpportunityTriggerHelper.updatePlannedSalesWhenOpportunityClosedWonOrDeleted(Trigger.old,True);
             }
-            
-        }catch(Exception e){
-            //transcation control
-            system.debug('Error '+e.getMessage());
-            throw e; //cancel all changes in transaction  
-        } 
+        }else{
+            system.debug('The user doesnt have access to this object');
+            Trigger.new[0].addError('The user doesnt have access to this object');
+
+        }
     }else {
         system.debug('Trigger is off');
+        Trigger.new[0].addError('Trigger is off');
     }
     
 }
