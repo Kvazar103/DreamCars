@@ -218,6 +218,24 @@
         <name>CustomLabels</name>
     </types>
     <types>
+        <members>Car_Brand.BMW</members>
+        <members>Car_Brand.Jeep</members>
+        <members>Car_Brand.Mercedes_Benz</members>
+        <members>Car_Brand.Opel</members>
+        <members>Car_Brand.Volkswagen</members>
+        <members>Car_Brand.Volvo</members>
+        <members>Car_Model.Astra</members>
+        <members>Car_Model.Defender</members>
+        <members>Car_Model.Touareg</members>
+        <members>Car_Model.Vito</members>
+        <members>Car_Model.Wrangler</members>
+        <members>Car_Model.Wrangler_Rubicon</members>
+        <members>Car_Model.X5</members>
+        <members>Car_Model.X7</members>
+        <members>Car_Model.XC90</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
         <members>enablement_coaching_feedback_ready</members>
         <name>CustomNotificationType</name>
     </types>
@@ -266,7 +284,9 @@
         <members>CalculationProcedureVersion</members>
         <members>Campaign</members>
         <members>CampaignMember</members>
+        <members>Car_Brand__mdt</members>
         <members>Car_Feature__c</members>
+        <members>Car_Model__mdt</members>
         <members>Car_Service__c</members>
         <members>CardPaymentMethod</members>
         <members>CartCheckoutSession</members>
@@ -511,7 +531,9 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Car_Brand__mdt-en_US</members>
         <members>Car_Feature__c-en_US</members>
+        <members>Car_Model__mdt-en_US</members>
         <members>Car_Service__c-en_US</members>
         <members>Feature__c-en_US</members>
         <members>Order_Payment__c-en_US</members>
@@ -521,6 +543,7 @@
         <name>CustomObjectTranslation</name>
     </types>
     <types>
+        <members>Car_Comparison</members>
         <members>Car_Feature__c</members>
         <members>Car_Service__c</members>
         <members>Feature__c</members>
@@ -676,7 +699,9 @@
         <members>CalculationProcedureVersion-Calculation Procedure Version Layout</members>
         <members>Campaign-Campaign Layout</members>
         <members>CampaignMember-Campaign Member Page Layout</members>
+        <members>Car_Brand__mdt-Car Brand Layout</members>
         <members>Car_Feature__c-Car Feature Layout</members>
+        <members>Car_Model__mdt-Car Model Layout</members>
         <members>Car_Service__c-Car Service Layout</members>
         <members>CardPaymentMethod-Card Payment Method Layout</members>
         <members>CartCheckoutSession-Cart Checkout Session Layout</members>
@@ -829,6 +854,11 @@
         <members>WorkTypeGroup-Work Type Group Layout</members>
         <members>WorkTypeGroupMember-Work Type Group Member Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>carCompare</members>
+        <members>carSelectionModal</members>
+        <name>LightningComponentBundle</name>
     </types>
     <types>
         <members>Account.AllAccounts</members>

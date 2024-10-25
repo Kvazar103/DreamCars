@@ -4707,7 +4707,13 @@
         <layout>CalculationProcedureVersion-Calculation Procedure Version Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Car_Brand__mdt-Car Brand Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Car_Feature__c-Car Feature Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Car_Model__mdt-Car Model Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Car_Service__c-Car Service Layout</layout>
@@ -4879,6 +4885,10 @@
         <recordType>Product2.Sold</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
+    <tabVisibilities>
+        <tab>Car_Comparison</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
     <tabVisibilities>
         <tab>Car_Feature__c</tab>
         <visibility>Hidden</visibility>

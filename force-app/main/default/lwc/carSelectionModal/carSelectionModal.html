@@ -2,13 +2,12 @@
   @description       : 
   @author            : Nazar Voinarovych
   @group             : 
-  @last modified on  : 10-25-2024
+  @last modified on  : 10-26-2024
   @last modified by  : Nazar Voinarovych
 -->
 <template>
     <section role="dialog" class="slds-modal slds-fade-in-open">
         <div class="slds-modal__container">
-            <!-- Header модального вікна -->
             <header class="slds-modal__header">
                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
                     <lightning-icon icon-name="utility:close" alternative-text="close"></lightning-icon>
@@ -16,21 +15,50 @@
                 <h2 class="slds-text-heading_medium">Select Car Details</h2>
             </header>
 
-            <!-- Body модального вікна -->
             <div class="slds-modal__content slds-p-around_medium">
                 <lightning-combobox name="year"
-                                    label="Select Brand"
+                                    label="Select Year"
                                     placeholder="Select Year"
-                                    value={carBrands}
+                                    options={carYears}
                                     onchange={handleYearChange}></lightning-combobox>
+                <lightning-combobox name="brand"
+                                    label="Select Brand"
+                                    placeholder="Select Brand"
+                                    options={carBrands}
+                                    onchange={handleBrandChange}></lightning-combobox>
                 <lightning-combobox name="model"
                                     label="Select Model"
                                     placeholder="Select Model"
-                                    value={carModels}
-                                    onchange={handleModelChange}></lightning-combobox>
+                                    options={carModels}
+                                    onchange={handleModalChange}></lightning-combobox>
+                <lightning-combobox name="drive_type"
+                                    label="Select Drive Type"
+                                    placeholder="Select Drive Type"
+                                    options={carDriveTypes}
+                                    onchange={handleDriveTypeChange}></lightning-combobox>
+                <lightning-combobox name="fuel_type"
+                                    label="Select Fuel Type"
+                                    placeholder="Select Fuel Type"
+                                    options={carFuelTypes}
+                                    onchange={handleFuelTypeChange}></lightning-combobox>
+                <lightning-combobox name="transmission_type"
+                                    label="Select Transmission Type"
+                                    placeholder="Select Transmission Type"
+                                    options={carTransmissionTypes}
+                                    onchange={handleTransmissionTypeChange}></lightning-combobox>
+                <lightning-combobox name="condition"
+                                    label="Select Condition"
+                                    placeholder="Select Condition"
+                                    options={carConditions}
+                                    onchange={handleConditionChange}></lightning-combobox>
+                <lightning-combobox name="safety_rating"
+                                    label="Select Safety Rating"
+                                    placeholder="Select Safety Rating"
+                                    options={carSafetyRating}
+                                    onchange={handleSafetyRatingChange}></lightning-combobox>
+                                    
             </div>
 
-            <!-- Footer модального вікна -->
             <footer class="slds-modal__footer">
                 <lightning-button variant="neutral" label="Cancel" onclick={handleClose}></lightning-button>
                 <lightning-button variant="brand" label="Add Car" onclick={handleAddCar} class="slds-m-left_small"></lightning-button>
