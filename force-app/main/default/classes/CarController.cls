@@ -75,23 +75,32 @@ public with sharing class CarController {
     }
     
     @AuraEnabled(cacheable=true)
-    public static Product2 getCarByModelBrandYear(String model,String brand,String year){
+    public static Product2 getCarBySpecifica(String model,String brand,String year,String condition,String driveType,
+    String fuelType,String transmissionType,String safetyRating){
         return [
             SELECT Id,
             Model__c,
             Brand__c,
             Car_Status__c,
             Condition__c,
+            Drive_Type__c,
             Engine_Power__c,
+            Sale_Price__c,
             Fuel_Type__c,
             Mileage__c,
             Transmission_Type__c,
             Year_of_Manufacture__c,
-            Discount_Made__c
+            Discount_Made__c,
+            Safety_Rating__c
             FROM Product2
             WHERE Model__c=:model 
             AND Brand__c=:brand
             AND Year_of_Manufacture__c=:Decimal.valueOf(year)
+            AND Condition__c=:condition
+            AND Drive_Type__c=:driveType
+            AND Fuel_Type__c=:fuelType
+            AND Transmission_Type__c=:transmissionType
+            AND Safety_Rating__c=:safetyRating
             WITH SECURITY_ENFORCED LIMIT 1
         ];
         

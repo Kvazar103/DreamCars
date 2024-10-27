@@ -1,4 +1,4 @@
-import { LightningElement,track,wire } from 'lwc';
+import { LightningElement,track,wire,api } from 'lwc';
 
 import getCarModels from '@salesforce/apex/CarController.getCarModels';
 import getCarBrands from '@salesforce/apex/CarController.getCarBrands';
@@ -17,6 +17,8 @@ export default class CarSelectionModal extends LightningElement {
     @track carTransmissionTypes=[];
     @track carSafetyRating=[];
 
+    @api isFirstCarModalOpen;
+
     selectedModel='';
     selectedBrand='';
     selectedYear='';
@@ -29,7 +31,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarModels)
     wiredCarModels({error,data}){
         if(data){
-            this.carModels=data.map(model=>({label:model,value:model}));
+            this.carModels=data.map(model=>({label:model.replace(/_/g,' '),value:model}));
         }else if(error){
             console.log('Car models error: '+error);
         }
@@ -37,7 +39,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarBrands)
     wiredCarBrands({error,data}){
         if(data){
-            this.carBrands=data.map(brand=>({label:brand,value:brand}));
+            this.carBrands=data.map(brand=>({label:brand.replace(/_/g,' '),value:brand}));
         }else if(error){
             console.log('Car brands error: '+error);
         }
@@ -45,7 +47,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarDriveTypes)
     wiredCarDriveTypes({error,data}){
         if(data){
-            this.carDriveTypes=data.map(drive_type=>({label:drive_type,value:drive_type}));
+            this.carDriveTypes=data.map(drive_type=>({label:drive_type.replace(/_/g,' '),value:drive_type}));
         }else if(error){
             console.log('Car Drive Type error: '+error);
         }
@@ -53,7 +55,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarFuelTypes)
     wiredCarFuelTypes({error,data}){
         if(data){
-            this.carFuelTypes=data.map(fuel_type=>({label:fuel_type,value:fuel_type}));
+            this.carFuelTypes=data.map(fuel_type=>({label:fuel_type.replace(/_/g,' '),value:fuel_type}));
         }else if(error){
             console.log('Car Fuel Type error: '+error);
         }
@@ -61,7 +63,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarTransmissionType)
     wiredCarTransmissionTypes({error,data}){
         if(data){
-            this.carTransmissionTypes=data.map(transmission_type=>({label:transmission_type,value:transmission_type}));
+            this.carTransmissionTypes=data.map(transmission_type=>({label:transmission_type.replace(/_/g,' '),value:transmission_type}));
         }else if(error){
             console.log('Car Transmission Type error: '+ error);
         }
@@ -69,7 +71,7 @@ export default class CarSelectionModal extends LightningElement {
     @wire(getCarCondition)
     wiredCarCondition({error,data}){
         if(data){
-            this.carConditions=data.map(condition=>({label:condition,value:condition}));
+            this.carConditions=data.map(condition=>({label:condition.replace(/_/g,' '),value:condition}));
         }else if(error){
             console.log('Car Condition error: '+error);
         }
@@ -88,29 +90,36 @@ export default class CarSelectionModal extends LightningElement {
         }
     }
     handleYearChange(event){
-        this.selectedYear=event.target.value;
+        this.selectedYear=event.target.value.replace(/_/g,' ');
     }
     handleModalChange(event){
-        this.selectedModel=event.target.value;
+        this.selectedModel=event.target.value.replace(/_/g,' ');
     }
     handleBrandChange(event){
-        this.selectedBrand=event.target.value;
+        this.selectedBrand=event.target.value.replace(/_/g,' ');
     }
     handleConditionChange(event){
-        this.selectedCondition=event.target.value;
+        this.selectedCondition=event.target.value.replace(/_/g,' ');
     }
     handleDriveTypeChange(event){
-        this.selectedDriveType=event.target.value;
+        this.selectedDriveType=event.target.value.replace(/_/g,' ');
+    
     }
     handleFuelTypeChange(event){
-        this.selectedFuelType=event.target.value;
+        this.selectedFuelType=event.target.value.replace(/_/g,' ');
     }
     handleTransmissionTypeChange(event){
-        this.selectedTransmissionType=event.target.value;
+        this.selectedTransmissionType=event.target.value.replace(/_/g,' ');
     }
     handleSafetyRatingChange(event){
-        this.selectedSafetyRating=event.target.value;
+        this.selectedSafetyRating=event.target.value.replace(/_/g,' ');
     }
+    handleClose(event){
+        console.log(event);
+        console.log('trrr');
+        this.isFirstCarModalOpen=false;
+    }
+
 
     
 }

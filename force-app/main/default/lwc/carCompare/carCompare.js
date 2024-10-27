@@ -29,7 +29,7 @@ export default class CarCompare extends LightningElement {
 
     }
     handleCloseFirstCarModal(){
-        this.isModalOpen=false;
+        this.isFirstCarModalOpen=false;
     }
     handleCloseSecondCarModal(){
         this.isSecondCarModalOpen=false;

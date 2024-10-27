@@ -2,7 +2,7 @@
   @description       : 
   @author            : Nazar Voinarovych
   @group             : 
-  @last modified on  : 10-25-2024
+  @last modified on  : 10-26-2024
   @last modified by  : Nazar Voinarovych
 -->
 
@@ -39,22 +39,27 @@
                     <lightning-layout-item padding="around-small" size="6">
                         <div class="page-section page-right for-item">
                             <button class="button-style" onclick={handleAddFirstCar}>+Add a vehicle</button>
-                            <c-car-selection-modal if:true={isFirstCarModalOpen} onclose={handleCloseFirstCarModal}></c-car-selection-modal>
+                            <c-car-selection-modal message-from-car-compare={isFirstCarModalOpen} if:true={isFirstCarModalOpen} onclose={handleCloseFirstCarModal}></c-car-selection-modal>
                         </div>
                     </lightning-layout-item>
                     <lightning-layout-item padding="around-small" size="6">
                         <div class="page-section page-main for-item">
-                            <button class="button-style" onclick={handleClick}>+Add a vehicle</button>
+                            <button class="button-style" onclick={handleAddSecondCar}>+Add a vehicle</button>
+                            <c-car-selection-modal if:true={isSecondCarModalOpen} onclose={handleCloseSecondCarModal}></c-car-selection-modal>
                         </div>
                     </lightning-layout-item>
                     <lightning-layout-item padding="around-small" size="6">
                         <div class="page-section page-right for-item">
-                            <button class="button-style" onclick={handleClick}>+Add a vehicle</button>
+                            <button class="button-style" onclick={handleAddThirdCar}>+Add a vehicle</button>
+                            <c-car-selection-modal if:true={isThirdCarModalOpen} onclose={handleCloseThirdCarModal}></c-car-selection-modal>
+
                         </div>
                     </lightning-layout-item>
                     <lightning-layout-item  padding="around-small" size="6">
                         <div class="page-section page-right for-item">
-                            <button class="button-style" onclick={handleClick}>+Add a vehicle</button>
+                            <button class="button-style" onclick={handleAddFourthCar}>+Add a vehicle</button>
+                            <c-car-selection-modal if:true={isFourthCarModalOpen} onclose={handleCloseFourthCarModal}></c-car-selection-modal>
+
                         </div>
                     </lightning-layout-item>
                 </lightning-layout>
