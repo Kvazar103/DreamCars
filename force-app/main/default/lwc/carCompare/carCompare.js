@@ -2,43 +2,30 @@ import { LightningElement ,track} from 'lwc';
 
 export default class CarCompare extends LightningElement {
 
-    @track firstCar={};
-    @track secondCar={};
-    @track thirdCar={};
-    @track fourthCar={};
+    @track cars=[];
+    @track isModalOpen=false;
 
-    isFirstCarModalOpen=false;
-    isSecondCarModalOpen=false;
-    isThirdCarModalOpen=false;
-    isFourthCarModalOpen=false;
+    get isCarsSize4(){
+        return this.cars.length==4;
+    }
 
+    hadnleAddVehicleButtonClick(){
+        this.isModalOpen=true;
+    }
 
-    handleAddFirstCar(){
-        this.isFirstCarModalOpen=true;
+    closeModal(){
+        this.isModalOpen=false;
     }
-    handleAddSecondCar(){
-        this.isSecondCarModalOpen=true;
-
+    removeCar(event){
+        for(let i=0;i<this.cars.length;i++){
+            if(this.cars[i].Id===event.currentTarget.dataset.id){
+                this.cars.splice(i,1);
+            }
+        }
     }
-    handleAddThirdCar(){
-        this.isThirdCarModalOpen=true;
-
-    }
-    handleAddFourthCar(){
-        this.isFourthCarModalOpen=true;
-
-    }
-    handleCloseFirstCarModal(){
-        this.isFirstCarModalOpen=false;
-    }
-    handleCloseSecondCarModal(){
-        this.isSecondCarModalOpen=false;
-    }
-    handleCloseThirdCarModal(){
-        this.isThirdCarModalOpen=false;
-    }
-    handleCloseFourthCarModal(){
-        this.isFourthCarModalOpen=false;
+    handleCarCreated(event){
+        this.isModalOpen=false;
+        this.cars.push(event.detail);
     }
 
 

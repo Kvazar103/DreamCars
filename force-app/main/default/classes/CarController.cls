@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Nazar Voinarovych
  * @group             : 
- * @last modified on  : 10-26-2024
+ * @last modified on  : 10-29-2024
  * @last modified by  : Nazar Voinarovych
 **/
 public with sharing class CarController {
@@ -73,11 +73,11 @@ public with sharing class CarController {
         }
         return conditions;
     }
-    
+
     @AuraEnabled(cacheable=true)
-    public static Product2 getCarBySpecifica(String model,String brand,String year,String condition,String driveType,
+    public static Product2 getCar(String model,String brand,String year,String condition,String driveType,
     String fuelType,String transmissionType,String safetyRating){
-        return [
+        Product2 car=[
             SELECT Id,
             Model__c,
             Brand__c,
@@ -89,6 +89,9 @@ public with sharing class CarController {
             Fuel_Type__c,
             Mileage__c,
             Transmission_Type__c,
+            Top_Speed_Km_h__c,
+            Torque_Nm__c,
+            Fuel_Efficiency_L_100km__c,
             Year_of_Manufacture__c,
             Discount_Made__c,
             Safety_Rating__c
@@ -103,6 +106,7 @@ public with sharing class CarController {
             AND Safety_Rating__c=:safetyRating
             WITH SECURITY_ENFORCED LIMIT 1
         ];
+        return car;
         
     }
 }

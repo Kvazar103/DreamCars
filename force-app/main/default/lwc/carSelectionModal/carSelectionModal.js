@@ -1,4 +1,5 @@
 import { LightningElement,track,wire,api } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import getCarModels from '@salesforce/apex/CarController.getCarModels';
 import getCarBrands from '@salesforce/apex/CarController.getCarBrands';
@@ -6,6 +7,7 @@ import getCarDriveTypes from '@salesforce/apex/CarController.getCarDriveTypes';
 import getCarFuelTypes from '@salesforce/apex/CarController.getCarFuelTypes';
 import getCarTransmissionType from '@salesforce/apex/CarController.getCarTransmissionType';
 import getCarCondition from '@salesforce/apex/CarController.getCarCondition';
+import getCar from '@salesforce/apex/CarController.getCar';
 
 export default class CarSelectionModal extends LightningElement {
     @track carModels=[];
@@ -17,8 +19,6 @@ export default class CarSelectionModal extends LightningElement {
     @track carTransmissionTypes=[];
     @track carSafetyRating=[];
 
-    @api isFirstCarModalOpen;
-
     selectedModel='';
     selectedBrand='';
     selectedYear='';
@@ -27,6 +27,8 @@ export default class CarSelectionModal extends LightningElement {
     selectedFuelType='';
     selectedTransmissionType='';
     selectedSafetyRating='';
+
+    @track selectedCar={};
 
     @wire(getCarModels)
     wiredCarModels({error,data}){
@@ -114,11 +116,48 @@ export default class CarSelectionModal extends LightningElement {
     handleSafetyRatingChange(event){
         this.selectedSafetyRating=event.target.value.replace(/_/g,' ');
     }
-    handleClose(event){
-        console.log(event);
-        console.log('trrr');
-        this.isFirstCarModalOpen=false;
+
+    closeModal(){
+        //this.isModalOpen=false;
+        this.dispatchEvent(new CustomEvent('close'));
     }
+
+    async addCar(){
+        try{
+            const car=await getCar({
+                model:this.selectedModel,
+                brand:this.selectedBrand,
+                year:this.selectedYear,
+                condition:this.selectedCondition,
+                driveType:this.selectedDriveType,
+                fuelType:this.selectedFuelType,
+                transmissionType:this.selectedTransmissionType,
+                safetyRating:this.selectedSafetyRating
+            });
+            if(car){
+                this.selectedCar=car;
+                const event=new ShowToastEvent({
+                    title: 'Success!',
+                    message: 'Car successfully found!',
+                    variant:'success'
+                    
+                })
+                this.dispatchEvent(new CustomEvent('carcreated',{detail:car}));
+                this.dispatchEvent(event);
+                this.closeModal();
+            }
+        }catch(error){
+            console.log("Fetcing car error: "+error);
+            const errorEvent=new ShowToastEvent({
+                title:'Error',
+                message:'No such car',
+                variant:'error'
+            });
+            this.dispatchEvent(errorEvent);
+           
+        }
+    }
+
 
 
     
