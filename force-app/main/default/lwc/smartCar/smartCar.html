@@ -1,0 +1,85 @@
+<!--
+  @description       : 
+  @author            : Nazar Voinarovych
+  @group             : 
+  @last modified on  : 11-03-2024
+  @last modified by  : Nazar Voinarovych
+-->
+<template>
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__body">
+                <h1 if:true={vehicle} class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">
+                    {vehicle.year} {vehicle.make} {vehicle.model}</h1>
+                <h1 if:false={vehicle} class="slds-page-header__title slds-truncate"
+                    title="Rohde Corp - 80,000 Widgets">Loading your current car...</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-container">
+        <div>
+            <p class="field-title">Door Lock status</p> 
+        </div>
+        <lightning-layout if:true={vehicleLockStatus}>
+       
+            <template for:each={vehicleLockStatus.doors} for:item="door" for:index="index">
+                <lightning-layout-item key={door.id} padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title">{door.type}</p>
+                        <p>{door.status}</p>
+                    </div>
+                </lightning-layout-item>
+            </template>
+            <div class="header-column">
+                <p class="field-title">IS CAR LOCKED:</p>
+                <p>{vehicleLockStatus.isLocked}</p>
+            </div>
+            <div if:false={isLoading}>
+                <lightning-button if:false={vehicleLockStatus.isLocked} variant="destructive" label="Lock car" title="Destructive action" onclick={lockUnlockButtonClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button if:true={vehicleLockStatus.isLocked} variant="success" label="Unlock car" title="Successful action" onclick={lockUnlockButtonClick} class="slds-m-left_x-small"></lightning-button>
+            </div>
+            <div if:true={isLoading}>
+                Loading...
+            </div>
+      
+        </lightning-layout>
+        <lightning-layout if:false={vehicleLockStatus}>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>Loading...</p>
+                    </div>
+                </lightning-layout-item>
+
+        </lightning-layout>
+       
+    </div>
+
+    <div class="c-container">
+        <div>
+            <p class="field-title">Window status</p> 
+        </div>
+        <lightning-layout if:true={vehicleLockStatus}>
+       
+            <template for:each={vehicleLockStatus.windows} for:item="window" for:index="index">
+                <lightning-layout-item key={window.id} padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title">{window.type}</p>
+                        <p>{window.status}</p>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+        <lightning-layout if:false={vehicleLockStatus}>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>Loading...</p>
+                    </div>
+                </lightning-layout-item>
+
+        </lightning-layout>
+    </div>
+
+
+
+</template>

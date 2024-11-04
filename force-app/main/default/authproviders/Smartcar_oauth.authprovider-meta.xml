@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://connect.smartcar.com/oauth/authorize?mode=simulated</authorizeUrl>
+    <consumerKey>1b79b94b-10e8-49f4-86c9-2a59a95916ed</consumerKey>
+    <consumerSecret>Placeholder_Value</consumerSecret>
+    <friendlyName>Smartcar oauth</friendlyName>
+    <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
+    <isPkceEnabled>true</isPkceEnabled>
+    <providerType>OpenIdConnect</providerType>
+    <requireMfa>false</requireMfa>
+    <sendAccessTokenInHeader>true</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+    <tokenUrl>https://auth.smartcar.com/oauth/token</tokenUrl>
+</AuthProvider>

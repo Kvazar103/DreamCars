@@ -1,0 +1,15 @@
+{
+	"isLocked" : false,
+	"doors" : [
+		{"type": "frontLeft" , "status" : "CLOSED"},
+		{"type": "frontRight" , "status" : "OPEN"},
+		{"type": "backRight" , "status" : "CLOSED"},
+		{"type": "backLeft" , "status" : "CLOSED"}
+	],
+	"windows" : [
+		{"type": "frontLeft" , "status" : "CLOSED"},
+		{"type": "frontRight" , "status" : "CLOSED"},
+		{"type": "backRight" , "status" : "UNKNOWN"},
+		{"type": "backLeft" , "status" : "CLOSED"}
+	]
+}
