@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Nazar Voinarovych
+ * @group             : 
+ * @last modified on  : 11-05-2024
+ * @last modified by  : Nazar Voinarovych
+**/
 @isTest
 public with sharing class CaseTriggerHelperTest {
     
