@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Nazar Voinarovych
+ * @group             : 
+ * @last modified on  : 11-05-2024
+ * @last modified by  : Nazar Voinarovych
+**/
 trigger CaseTrigger on Case (after insert,before insert) {
     
     Trigger_Control__c triggerSetting=Trigger_Control__c.getInstance('CaseTriggerSettings');  
