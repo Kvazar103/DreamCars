@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Nazar Voinarovych
  * @group             : 
- * @last modified on  : 11-04-2024
+ * @last modified on  : 11-05-2024
  * @last modified by  : Nazar Voinarovych
 **/
 public with sharing class SmartcarService {
@@ -121,8 +121,8 @@ public with sharing class SmartcarService {
         }
     }
     @AuraEnabled(cacheable=true)
-    public static Integer sendDestination(String body){
-        //String body='{"latitude":'+latitude+',"longitude":'+longitude+'}';
+    public static Integer sendDestination(Decimal latitude,Decimal longitude){
+        String body='{"latitude":'+latitude+',"longitude":'+longitude+'}';
         system.debug('Body: '+body);
 
 

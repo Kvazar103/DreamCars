@@ -11,7 +11,7 @@ export default class SmartCar extends LightningElement {
     @track vehicle;
     @track vehicleOdometer;
     @track vehicleLockStatus;
-    @track isLoading=false;
+    isLoading=false;
     
     @wire(getVehicleAttributes)
     wiredVehicleInfo({error,data}){

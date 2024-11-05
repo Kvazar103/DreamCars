@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Nazar Voinarovych
  * @group             : 
- * @last modified on  : 11-04-2024
+ * @last modified on  : 11-05-2024
  * @last modified by  : Nazar Voinarovych
 **/
 
@@ -31,7 +31,7 @@ public with sharing class SmartcarServiceTest {
         SmartcarOdometerWrapper odometer=SmartcarService.getVehicleOdometer();
         SmartcarLockWrapper lockStatus=SmartcarService.getVehicleLockStatus();
         Integer lockVehicleStatus=SmartcarService.lockOrUnlockVehicle('{"action": "LOCK"}');
-        Integer destinationStatus=SmartcarService.sendDestination('{"latitude": 51.5007, "longitude" : 0.1246}');
+        Integer destinationStatus=SmartcarService.sendDestination(51.5007, 0.1246);
 
 
         Test.stopTest();

@@ -9,8 +9,8 @@ export default class SmartCarMapLocation extends LightningElement {
     @track mapMarkers=[];
     @track mapCenter={};
 
-    @track latitude;
-    @track longitude;
+    latitude;
+    longitude;
 
     @wire(getVehicleLocation)
     wiredVehicleLocation({error,data}){
@@ -40,9 +40,7 @@ export default class SmartCarMapLocation extends LightningElement {
     }
 
     async onLocationClick(){
-        let body='{"latitude":'+this.latitude+',"longitude":'+this.longitude+'}';
-        //const result=await sendDestination({latitude:this.latitude,longitude:this.longitude});
-        const result=await sendDestination({body:body});
+        const result=await sendDestination({latitude:this.latitude,longitude:this.longitude});
             if(result==200){
                 this.mapMarkers=[
                     {
