@@ -38,6 +38,14 @@
                 <behavior>Edit</behavior>
                 <field>Month__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Underperfoming__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>isPlannedTotalAmountGreaterThanTotalAmou__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
