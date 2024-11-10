@@ -16,4 +16,9 @@
         <default>false</default>
         <label>Web</label>
     </standardValue>
+    <standardValue>
+        <fullName>Web Car Service</fullName>
+        <default>false</default>
+        <label>Web Car Service</label>
+    </standardValue>
 </StandardValueSet>

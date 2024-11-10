@@ -1,0 +1,130 @@
+<apex:page renderAs="pdf" showHeader="false"
+           applyHtmlTag="false" 
+           standardStylesheets="false" standardController="Opportunity" >
+    <thead>
+        <th width="15%">
+            <apex:image url="{!$Resource.Copart_icon}" width="100" height="40"/>
+        </th>
+        <th width="15%">
+            <h3>
+                Sales Receipt/Bill of Sale
+            </h3> 
+        </th>
+        <th width="10%">
+            
+            <p style="font-weight:normal">
+                <apex:outputText value="Date:
+                                        {0,date,yyyy.MM.dd HH:mm:ss z}">
+                    <apex:param value="{! NOW() }"/>
+                </apex:outputText> 
+            </p>
+            
+            
+        </th>
+        
+        
+    </thead>
+    <hr style="border: none;height: 4px;color: #333;background-color: #333;"/>
+    
+    
+    <thead>
+        <th style="padding:0px 0px 3px 0px;">
+            MEMBER: <apex:outputText value="{!Opportunity.Id}"/>
+            <p>
+                <apex:outputText value="{!Opportunity.Account.Name}"/>
+            </p> 
+            <p style="font-weight:normal">
+                Opportunity name: <apex:outputText value="{!Opportunity.Name}"/>
+            </p>
+            <p style="font-weight:normal"> 
+                Stage:<apex:outputField value="{!Opportunity.StageName}"/>
+            </p>
+            <p style="font-weight:normal"> 
+                Amount:<apex:outputField value="{!Opportunity.Amount}"/>
+            </p>
+        </th>
+        
+        <th style="padding:12px 0px 0px 15px;">
+            SHIPPING ADDRESS: 
+            <p style="font-weight:normal;">
+                <apex:outputText value="{!Opportunity.Account.BillingStreet}"/>
+            </p>
+            <p style="font-weight:normal">
+                Zip/Postal code:<apex:outputText value="{!Opportunity.Account.BillingPostalCode}"/>
+            </p> 
+            <p style="font-weight:normal">
+                Phone:<apex:outputText value="{!Opportunity.Account.Phone}"/>
+            </p> 
+            <p style="font-weight:normal">
+                Website:<apex:outputText value="{!Opportunity.Account.Website}"/>
+            </p> 
+        </th>
+        <th>
+            <hr style="border-left: 3px solid black;
+                       height: 220px;"/>
+        </th>
+        <th style="padding:0px 0px 40px 0px;">
+            SELLER: 
+            <p style="font-weight:normal;">
+                <apex:outputText value="{!Opportunity.Owner.Name}"/>
+            </p>
+            <p style="font-weight:normal;">
+                <apex:outputText value="{!Opportunity.Owner.Email}"/>
+            </p>
+            <p style="font-weight:normal;">
+                <apex:outputText value="{!Opportunity.Owner.CompanyName}"/>
+            </p>
+        </th>
+        
+    </thead>
+    <div style="text-align:center;">
+        <h3>Charges and Payments</h3>
+    </div>
+    <hr style="border: none;height: 4px;color: #333;background-color: #333;"/>
+    
+    <thead style="padding: 50px;">
+        <tr>
+            <th>Car</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Sales Price</th>
+            <th>Condition</th>
+            <th>VIN number</th>
+            <th>Sale Date</th>
+            
+        </tr>
+        <apex:variable var="totalAmount" value="{!0}" />
+        <apex:repeat value="{!Opportunity.OpportunityLineItems}" var="oli">
+            
+            
+            <tr>
+                <td>{!oli.Product2.Name}</td>
+                <td>{!oli.Product2.Brand__c}</td>
+                <td>{!oli.Product2.Model__c}</td>
+                <td style="text-align:center;"><apex:outputText value="{!FLOOR(oli.Quantity)}"/></td>
+                <td><apex:outputText value="{!FLOOR(oli.UnitPrice)}"/>$</td>
+                <td>{!oli.Product2.Condition__c}</td>
+                <td><apex:outputText value="{!FLOOR(oli.Product2.VIN_Number__c)}"/></td>
+                <td><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                    <apex:param value="{!oli.Product2.Sale_Date__c}" /> 
+                    </apex:outputText>
+                </td>
+            </tr>
+            <apex:variable var="totalAmount" value="{!totalAmount + oli.UnitPrice}" />
+        </apex:repeat>
+    </thead>
+    <hr style="border: none;height: 4px;color: #333;background-color: #333;"/>
+    <h4>Total Amount: 
+        <apex:outputText value="{!FLOOR(totalAmount)}"/>$</h4>
+    
+    <hr style="border: none;height: 4px;color: #333;background-color: #333;"/>
+    
+    <div>
+        <thead>
+            <th>Seller:</th>
+            <th>_________________________________________________________________________________</th>
+        </thead>
+    </div>
+
+</apex:page>
