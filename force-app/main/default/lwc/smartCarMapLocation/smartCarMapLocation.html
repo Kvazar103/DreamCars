@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Nazar Voinarovych
+  @group             : 
+  @last modified on  : 11-03-2024
+  @last modified by  : Nazar Voinarovych
+-->
+<template>
+    <lightning-card class="container" title="Location of your car" icon-name="utility:map">
+        <lightning-map
+            map-markers={mapMarkers}
+            center={mapCenter}
+            zoom-level="10"
+            list-view="visible">
+        </lightning-map>
+    </lightning-card>
+    <lightning-input-location
+        class="input-location-form"
+        label="Send Destination" 
+        latitude={mapCenter.Latitude} 
+        longitude={mapCenter.Longitude} 
+        latitude-value={latitude}
+        longitude-value={longitude}
+        onchange={onLocationChange}>
+    </lightning-input-location>
+
+    <lightning-button
+        label="Send"
+        onclick={onLocationClick}
+        class="slds-m-top_medium">
+    </lightning-button>
+
+</template>

@@ -15,6 +15,13 @@
         <members>OrderController</members>
         <members>PlannedSalesTriggerHelper</members>
         <members>PlannedSalesTriggerHelperTest</members>
+        <members>SmartcarLocationWrapper</members>
+        <members>SmartcarLockTypeStatusWrapper</members>
+        <members>SmartcarLockWrapper</members>
+        <members>SmartcarOdometerWrapper</members>
+        <members>SmartcarService</members>
+        <members>SmartcarServiceTest</members>
+        <members>SmartcarWrapper</members>
         <members>TestDataFactory</members>
         <name>ApexClass</name>
     </types>
@@ -62,6 +69,10 @@
     <types>
         <members>ModalWindowOrderReview</members>
         <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Smartcar_oauth</members>
+        <name>AuthProvider</name>
     </types>
     <types>
         <members>Case.EmailNotificationToCustomer</members>
@@ -884,6 +895,8 @@
     <types>
         <members>carCompare</members>
         <members>carSelectionModal</members>
+        <members>smartCar</members>
+        <members>smartCarMapLocation</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
@@ -1092,6 +1105,10 @@
         <name>MilestoneType</name>
     </types>
     <types>
+        <members>SmartcarAPI</members>
+        <name>NamedCredential</name>
+    </types>
+    <types>
         <members>NotificationTypeConfig</members>
         <name>NotificationTypeConfig</name>
     </types>
@@ -1218,6 +1235,7 @@
     </types>
     <types>
         <members>ApexDevNet</members>
+        <members>SmartcarAPI_url</members>
         <name>RemoteSiteSetting</name>
     </types>
     <types>
@@ -1645,6 +1663,11 @@
     </types>
     <types>
         <members>Copart_icon</members>
+        <members>jsonVehicleAttributes</members>
+        <members>jsonVehicleDestination</members>
+        <members>jsonVehicleLocation</members>
+        <members>jsonVehicleLockStatus</members>
+        <members>jsonVehicleOdometer</members>
         <name>StaticResource</name>
     </types>
     <types>
