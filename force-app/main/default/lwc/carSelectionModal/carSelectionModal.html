@@ -1,0 +1,69 @@
+<!--
+  @description       : 
+  @author            : Nazar Voinarovych
+  @group             : 
+  @last modified on  : 10-28-2024
+  @last modified by  : Nazar Voinarovych
+-->
+<template >
+    <section  role="dialog" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close"></lightning-icon>
+                </button>
+                <h2 class="slds-text-heading_medium">Add Vehicle</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+                <lightning-combobox name="year"
+                                    label="Select Year"
+                                    placeholder="Select Year"
+                                    options={carYears}
+                                    onchange={handleYearChange}></lightning-combobox>
+                <lightning-combobox name="brand"
+                                    label="Select Brand"
+                                    placeholder="Select Brand"
+                                    options={carBrands}
+                                    onchange={handleBrandChange}></lightning-combobox>
+                <lightning-combobox name="model"
+                                    label="Select Model"
+                                    placeholder="Select Model"
+                                    options={carModels}
+                                    onchange={handleModalChange}></lightning-combobox>
+                <lightning-combobox name="drive_type"
+                                    label="Select Drive Type"
+                                    placeholder="Select Drive Type"
+                                    options={carDriveTypes}
+                                    onchange={handleDriveTypeChange}></lightning-combobox>
+                <lightning-combobox name="fuel_type"
+                                    label="Select Fuel Type"
+                                    placeholder="Select Fuel Type"
+                                    options={carFuelTypes}
+                                    onchange={handleFuelTypeChange}></lightning-combobox>
+                <lightning-combobox name="transmission_type"
+                                    label="Select Transmission Type"
+                                    placeholder="Select Transmission Type"
+                                    options={carTransmissionTypes}
+                                    onchange={handleTransmissionTypeChange}></lightning-combobox>
+                <lightning-combobox name="condition"
+                                    label="Select Condition"
+                                    placeholder="Select Condition"
+                                    options={carConditions}
+                                    onchange={handleConditionChange}></lightning-combobox>
+                <lightning-combobox name="safety_rating"
+                                    label="Select Safety Rating"
+                                    placeholder="Select Safety Rating"
+                                    options={carSafetyRating}
+                                    onchange={handleSafetyRatingChange}></lightning-combobox>
+                                    
+            </div>
+
+            <footer class="slds-modal__footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                <lightning-button variant="brand" label="Add Car" onclick={addCar} class="slds-m-left_small"></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div  class="slds-backdrop slds-backdrop_open"></div>
+</template>

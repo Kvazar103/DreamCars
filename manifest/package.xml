@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>CarController</members>
         <members>CarTriggerHelper</members>
         <members>CarTriggerHelperTest</members>
         <members>CaseTriggerHelper</members>
@@ -218,6 +219,37 @@
         <name>CustomLabels</name>
     </types>
     <types>
+        <members>Car_Brand.BMW</members>
+        <members>Car_Brand.Jeep</members>
+        <members>Car_Brand.Mercedes_Benz</members>
+        <members>Car_Brand.Opel</members>
+        <members>Car_Brand.Volkswagen</members>
+        <members>Car_Brand.Volvo</members>
+        <members>Car_Model.Astra</members>
+        <members>Car_Model.Defender</members>
+        <members>Car_Model.Touareg</members>
+        <members>Car_Model.Vito</members>
+        <members>Car_Model.Wrangler</members>
+        <members>Car_Model.Wrangler_Rubicon</members>
+        <members>Car_Model.X5</members>
+        <members>Car_Model.X7</members>
+        <members>Car_Model.XC90</members>
+        <members>Condition.New</members>
+        <members>Condition.Used</members>
+        <members>Drive_Type.AWD</members>
+        <members>Drive_Type.FWD</members>
+        <members>Drive_Type.RWD</members>
+        <members>Drive_Type.X4WD</members>
+        <members>Fuel_Type.Diesel</members>
+        <members>Fuel_Type.Electric</members>
+        <members>Fuel_Type.Gasoline</members>
+        <members>Fuel_Type.Hybrid</members>
+        <members>Transmission_Type.Automatic</members>
+        <members>Transmission_Type.Manual</members>
+        <members>Transmission_Type.Semi_Automatic</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
         <members>enablement_coaching_feedback_ready</members>
         <name>CustomNotificationType</name>
     </types>
@@ -266,7 +298,9 @@
         <members>CalculationProcedureVersion</members>
         <members>Campaign</members>
         <members>CampaignMember</members>
+        <members>Car_Brand__mdt</members>
         <members>Car_Feature__c</members>
+        <members>Car_Model__mdt</members>
         <members>Car_Service__c</members>
         <members>CardPaymentMethod</members>
         <members>CartCheckoutSession</members>
@@ -291,6 +325,7 @@
         <members>CommSubscriptionChannelType</members>
         <members>CommSubscriptionConsent</members>
         <members>CommSubscriptionTiming</members>
+        <members>Condition__mdt</members>
         <members>ConsumptionRate</members>
         <members>ConsumptionSchedule</members>
         <members>Contact</members>
@@ -320,6 +355,7 @@
         <members>DecisionTblFileImportData</members>
         <members>DeliveryEstimationSetup</members>
         <members>DigitalWallet</members>
+        <members>Drive_Type__mdt</members>
         <members>DuplicateRecordItem</members>
         <members>DuplicateRecordSet</members>
         <members>EmailMessage</members>
@@ -344,6 +380,7 @@
         <members>FlowOrchestrationStageInstance</members>
         <members>FlowOrchestrationStepInstance</members>
         <members>FlowOrchestrationWorkItem</members>
+        <members>Fuel_Type__mdt</members>
         <members>FulfillmentOrder</members>
         <members>FulfillmentOrderItemAdjustment</members>
         <members>FulfillmentOrderItemTax</members>
@@ -479,6 +516,7 @@
         <members>TimeSlot</members>
         <members>Topic</members>
         <members>TopicAssignment</members>
+        <members>Transmission_Type__mdt</members>
         <members>Trigger_Control__c</members>
         <members>User</members>
         <members>UserExternalCredential</members>
@@ -511,16 +549,23 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Car_Brand__mdt-en_US</members>
         <members>Car_Feature__c-en_US</members>
+        <members>Car_Model__mdt-en_US</members>
         <members>Car_Service__c-en_US</members>
+        <members>Condition__mdt-en_US</members>
+        <members>Drive_Type__mdt-en_US</members>
         <members>Feature__c-en_US</members>
+        <members>Fuel_Type__mdt-en_US</members>
         <members>Order_Payment__c-en_US</members>
         <members>Planned_Sales__c-en_US</members>
+        <members>Transmission_Type__mdt-en_US</members>
         <members>Trigger_Control__c-en_US</members>
         <members>Warranty__c-en_US</members>
         <name>CustomObjectTranslation</name>
     </types>
     <types>
+        <members>Car_Comparison</members>
         <members>Car_Feature__c</members>
         <members>Car_Service__c</members>
         <members>Feature__c</members>
@@ -676,7 +721,9 @@
         <members>CalculationProcedureVersion-Calculation Procedure Version Layout</members>
         <members>Campaign-Campaign Layout</members>
         <members>CampaignMember-Campaign Member Page Layout</members>
+        <members>Car_Brand__mdt-Car Brand Layout</members>
         <members>Car_Feature__c-Car Feature Layout</members>
+        <members>Car_Model__mdt-Car Model Layout</members>
         <members>Car_Service__c-Car Service Layout</members>
         <members>CardPaymentMethod-Card Payment Method Layout</members>
         <members>CartCheckoutSession-Cart Checkout Session Layout</members>
@@ -692,6 +739,7 @@
         <members>CaseClose-Close Case Layout</members>
         <members>CaseMilestone-Case Milestone Layout</members>
         <members>CommunityMemberLayout-Community Member Layout</members>
+        <members>Condition__mdt-Condition Layout</members>
         <members>ConsumptionRate-Consumption Rate Layout</members>
         <members>ConsumptionSchedule-Consumption Schedule Layout</members>
         <members>Contact-Contact %28Marketing%29 Layout</members>
@@ -714,6 +762,7 @@
         <members>DataUseLegalBasis-Data Use Legal Basis Layout</members>
         <members>DataUsePurpose-Data Use Purpose Layout</members>
         <members>DigitalWallet-Digital Wallet Layout</members>
+        <members>Drive_Type__mdt-Drive Type Layout</members>
         <members>DuplicateRecordSet-Duplicate Record Set Layout</members>
         <members>EmailMessage-Email Message Layout</members>
         <members>EngagementChannelType-Engagement Channel Type Layout</members>
@@ -727,6 +776,7 @@
         <members>FinanceBalanceSnapshot-Finance Balance Snapshot Layout</members>
         <members>FinanceTransaction-Finance Transaction Layout</members>
         <members>FlowInterview-Flow Interview Layout</members>
+        <members>Fuel_Type__mdt-Fuel Type Layout</members>
         <members>FulfillmentOrder-Fulfillment Order Layout</members>
         <members>FulfillmentOrderItemAdjustment-Fulfillment Order Item Adjustment Layout</members>
         <members>FulfillmentOrderItemTax-Fulfillment Order Item Tax Layout</members>
@@ -807,6 +857,7 @@
         <members>Task-Task Layout</members>
         <members>ThreatDetectionFeedback-Threat Detection Feedback Layout</members>
         <members>TimeSlot-Time Slot Layout</members>
+        <members>Transmission_Type__mdt-Transmission Type Layout</members>
         <members>User-User Layout</members>
         <members>UserAlt-User Profile Layout</members>
         <members>UserProvAccount-User Provisioning Account Layout</members>
@@ -829,6 +880,11 @@
         <members>WorkTypeGroup-Work Type Group Layout</members>
         <members>WorkTypeGroupMember-Work Type Group Member Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>carCompare</members>
+        <members>carSelectionModal</members>
+        <name>LightningComponentBundle</name>
     </types>
     <types>
         <members>Account.AllAccounts</members>
