@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isPlannedTotalAmountGreaterThanTotalAmou__c</fullName>
+    <formula>Total_Amount_Earned__c  &lt;  Planned_Total_Amount__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>isPlannedTotalAmountGreaterThanTotalAmou</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

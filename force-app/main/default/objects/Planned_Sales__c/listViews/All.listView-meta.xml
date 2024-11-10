@@ -7,6 +7,8 @@
     <columns>Month__c</columns>
     <columns>Total_Amount_Earned__c</columns>
     <columns>Count_of_Cars_Sold__c</columns>
+    <columns>Underperfoming__c</columns>
+    <columns>isPlannedTotalAmountGreaterThanTotalAmou__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

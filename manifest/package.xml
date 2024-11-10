@@ -8,6 +8,12 @@
         <members>CaseTriggerHelperTest</members>
         <members>ContentDocumentLinkTriggerHelper</members>
         <members>ContentDocumentLinkTriggerHelperTest</members>
+        <members>MonthlySalesCheckBatch</members>
+        <members>MonthlySalesCheckBatchTest</members>
+        <members>MonthlySalesCheckNotificationQueueabTest</members>
+        <members>MonthlySalesCheckNotificationQueueable</members>
+        <members>MonthlySalesCheckSchedule</members>
+        <members>MonthlySalesCheckScheduleTest</members>
         <members>OpportunityLineItemTriggerHelper</members>
         <members>OpportunityLineItemTriggerHelperTest</members>
         <members>OpportunityTriggerHelper</members>
@@ -187,7 +193,9 @@
         <members>Planned_Sales__c.Planned_Count__c</members>
         <members>Planned_Sales__c.Planned_Total_Amount__c</members>
         <members>Planned_Sales__c.Total_Amount_Earned__c</members>
+        <members>Planned_Sales__c.Underperfoming__c</members>
         <members>Planned_Sales__c.Year__c</members>
+        <members>Planned_Sales__c.isPlannedTotalAmountGreaterThanTotalAmou__c</members>
         <members>Product2.Brand__c</members>
         <members>Product2.Buyer_Contact__c</members>
         <members>Product2.Car_Status__c</members>
